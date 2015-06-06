@@ -10,6 +10,7 @@
 
 #feature {
   padding-bottom: 40px;
+  padding-top:40px;
 }
 
 #feature  .transparent-bg {
@@ -100,6 +101,11 @@
   margin:auto;
 }
 
+#feature-container
+{
+	clear:both;
+}
+
 #pricing
 {
   background-color: #181A1C;
@@ -159,4 +165,39 @@
 {
   background-color: #181A1C;
   color:#1DA879;
+}
+
+#family
+{
+  padding:0px;
+  height: 100%;
+  background: top no-repeat fixed url('../img/picture.jpg');
+}
+
+#mini-game
+{
+  padding:105px 0px;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.minigame-title
+{
+  font-family: 'coolvetica';
+  color: #FFFFFF;
+  font-size: 30px;
+  display: block;
+  text-align: center;
+}
+
+.minigame-text
+{
+  margin-top: 30px;
+}
+
+.minigame-text p
+{
+  font-family: 'quicksand';
+  color: #FFFFFF;
+  text-align: center; 
+  font-size: 16px;
 }
