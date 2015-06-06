@@ -19,7 +19,8 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/rest-bundle": "1.6",
-        "jms/serializer-bundle": "^0.13.0"
+        "jms/serializer-bundle": "^0.13.0",
+        "escapestudios/wsse-authentication-bundle": "2.3.x-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

@@ -82,8 +82,7 @@
   81 => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DoctrineParamConverter',
   82 => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\ParamConverterInterface',
   83 => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\ParamConverterManager',
-  84 => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\TemplateListener',
-  85 => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\HttpCacheListener',
-  86 => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\SecurityListener',
-  87 => 'Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\ConfigurationAnnotation',
+  84 => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\HttpCacheListener',
+  85 => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\SecurityListener',
+  86 => 'Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\ConfigurationAnnotation',
 );
