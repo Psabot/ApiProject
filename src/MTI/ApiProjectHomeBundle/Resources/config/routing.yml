@@ -1,0 +1,3 @@
+mti_api_project_home_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MTIApiProjectHomeBundle:Default:index }

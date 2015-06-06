@@ -5,3 +5,7 @@ mti_hello_world:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+homepage:
+    pattern:   /
+    defaults:  { _controller: MTIApiProjectHomeBundle:Home:index }
