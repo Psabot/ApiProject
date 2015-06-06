@@ -1,0 +1,7 @@
+mti_hello_world:
+    resource: "@MTIHelloWorldBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
