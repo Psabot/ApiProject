@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="surveyManiaApp" id="app-container">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>API</title>
+        <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('css/homepage.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('css/animate.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('css/backoffice.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+        <script src="{{asset('js/jquery-1.11.3.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('js/wow.min.js')}}"></script>
+		    <script src="{{asset('js/gauge.js')}}"></script>
+        <script src="{{asset('js/chart.js')}}"></script>
+        <script src="{{asset('js/chartjslegend.js')}}"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Brand</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Nos offres</a></li>
+                <li><a href="#">Le produit</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div id="sub-menu">
+          <div id="burger-menu">
+            <div class="fa fa-bars"><span>Menu</span></div>
+          </div>
+          <div>
+          </div>
+        </div>
+        <div id="sidebar">
+          <ul>
+            <li><i class="fa fa-whatsapp"><span>Whatsapp</span></i></li>
+            <li><i class="fa fa-image"><span>Snapchat</span></i></li>
+          </ul>
+        </div>
+        <div id="bo-content">
+          <div class="col-sm-3" id="limit">
+            <div class="chartcontainer">
+              <h3>Nombre d'appels</h3>
+          		<canvas id="foo"></canvas>
+              <div id="gauge-value"></div>
+            </div>
+          </div>
+          <div class="col-sm-3" style="position:relative">
+            <div class="chartcontainer">
+              <h3 style="margin-bottom:27px;">Statistiques</h3>
+              <canvas id="myChart" width="150" height="150"></canvas>
+              <div id="legend"></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="chartcontainer">
+              <h3 style="margin-bottom:27px;">Nombre d'appels</h3>
+              <canvas id="myChart2" width="550" height="150"></canvas>
+            </div>
+          </div>
+        </div>
+		<script type="text/javascript">
+        $('.fa-bars').click(function (){
+            if ($('#sidebar').is(":visible") === true) {
+              $('#sidebar').animate({
+                'margin-left': '-240px'
+              }, {queue:false});
+              $('#bo-content').animate({
+                'margin-left':'0px', queue:false}, function(){console.log("ok");$('#sidebar').hide();}
+              );
+            } else {
+                $('#sidebar').show();
+                $('#sidebar').animate({
+                    'margin-left': '0'
+                }, {queue:false});
+                $('#bo-content').animate({
+                  'margin-left': '240px'
+                },{queue:false});
+            }
+        });
+
+			var opts = {
+			  lines: 12, // The number of lines to draw
+			  angle: 0, // The length of each line
+			  lineWidth: 0.45, // The line thickness
+			  pointer: {
+				length: 0.60, // The radius of the inner circle
+				strokeWidth: 0.033, // The rotation offset
+				color: '#000000' // Fill color
+			  },
+			  limitMax: 'false',   // If true, the pointer will not go past the end of the gauge
+			  percentColors: [[0.0, "#a9d70b" ], [0.50, "#f9c802"], [1.0, "#ff0000"]],
+			  strokeColor: '#E0E0E0',   // to see which ones work best for you
+			  generateGradient: true
+			};
+			var target = document.getElementById('foo');
+			var gauge = new Gauge(target).setOptions(opts);
+			gauge.setTextField(document.getElementById("gauge-value"));
+			gauge.maxValue = 3000; // set max gauge value
+			gauge.animationSpeed = 22; // set animation speed (32 is default value)
+			gauge.set(2500); // set actual value
+
+      var data = [
+        {
+            value: 300,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "Red"
+        },
+        {
+            value: 50,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "Green"
+        },
+        {
+            value: 100,
+            color: "#FDB45C",
+            highlight: "#FFC870",
+            label: "Yellow"
+        }
+      ]
+      legend(document.getElementById('legend'), data);
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var myDoughnutChart = new Chart(ctx).Doughnut(data);
+
+    var data2 = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [28, 48, 40, 19, 86, 27, 90]
+        }
+    ]
+};
+ var ctx2 = document.getElementById("myChart2").getContext("2d");
+    var myLineChart = new Chart(ctx2).Line(data2);
+		</script>
+	</body>
+</html>

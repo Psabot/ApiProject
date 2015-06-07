@@ -1,0 +1,137 @@
+body
+{
+	background-color: #f1f2f7;
+}
+
+.chartcontainer
+{
+	background-color: #FFFFFF;
+	padding: 10px 0px;
+}
+
+.chartcontainer h3
+{
+	text-align: center;
+}
+
+#foo
+{
+	margin: auto;
+  	display: block;
+}
+
+#gauge-value
+{
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	font-family: Open sans;
+}
+
+#sidebar
+{
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  background: #32323a;
+}
+
+#sub-menu
+{
+	border-bottom:1px solid rgba(0,0,0,0.05);
+}
+
+#burger-menu
+{
+	color:#FFFFFF;
+	text-align: center;
+	background: #32323a;
+	width: 240px;
+	display: inline-block;
+}
+
+#vertical-sub-menu
+{
+	display: inline-block;
+}
+
+#burger-menu div
+{
+	padding: 20px 0px;
+}
+
+#burger-menu span
+{
+	margin-left: 10px;
+	font-family: Open sans;
+}
+
+#bo-content
+{
+	margin-left: 240px;
+	padding: 25px 50px;
+}
+
+#sidebar ul
+{
+	padding: 0px;
+	margin-top: 5px;
+}
+
+#sidebar ul li:hover, #sidebar ul li:active
+{
+	background-color: #28282e;
+	color:#1DA879;
+	transition: all .3s ease-in-out;
+}
+
+#sidebar ul li
+{
+	color:#FFFFFF;
+	font-size: 16px;
+	list-style-type: none;
+	padding: 15px;
+	border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+#sidebar span 
+{
+	margin-left: 10px;
+	font-family: Open sans;
+	font-size: 12px;
+}
+
+#fork {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+}
+
+#legend {
+    float: right;
+  	margin-right: 30px;
+  	margin-top: 45px;
+}
+
+.legend .title {
+    display: block;
+    margin-bottom: 0.5em;
+    line-height: 1.2em;
+    padding: 0 0.3em;
+}
+
+.legend .color-sample {
+    display: block;
+    float: left;
+    width: 1em;
+    height: 1em;
+    border: 2px solid; /* Comment out if you don't want to show the fillColor */
+    border-radius: 0.5em; /* Comment out if you prefer squarish samples */
+    margin-right: 0.5em;
+}
+
+#myChart,  #myChart2
+{
+	margin-left: 20px;
+}

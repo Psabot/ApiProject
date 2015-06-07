@@ -1,3 +1,7 @@
+mti_user_back_office:
+    resource: "@MTIUserBackOfficeBundle/Resources/config/routing.yml"
+    prefix:   /
+
 mti_hello_world:
     resource: "@MTIHelloWorldBundle/Resources/config/routing.yml"
     prefix:   /
