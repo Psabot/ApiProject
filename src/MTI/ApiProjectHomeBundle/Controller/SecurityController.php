@@ -25,7 +25,7 @@ class SecurityController extends Controller
       $session->remove(SecurityContext::AUTHENTICATION_ERROR);
     }
 
-    return $this->render('MTIApiProjectHomeBundle:Home:login.html.twig', array(
+    return $this->render('MTIApiProjectHomeBundle:Home:index.html.twig', array(
       // Valeur du précédent nom d'utilisateur entré par l'internaute
       'last_username' => $session->get(SecurityContext::LAST_USERNAME),
       'error'         => $error,

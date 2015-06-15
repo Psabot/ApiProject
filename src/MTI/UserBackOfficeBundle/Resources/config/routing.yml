@@ -13,3 +13,7 @@ mti_user_back_office_show:
 mti_user_back_office_json:
     path:     /testjson
     defaults: { _controller: MTIUserBackOfficeBundle:Backoffice:testjson }
+
+mti_user_back_office_addcall:
+    path:     /addcall
+    defaults: { _controller: MTIUserBackOfficeBundle:Backoffice:addCall }

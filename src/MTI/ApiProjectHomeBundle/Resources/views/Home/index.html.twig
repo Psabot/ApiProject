@@ -10,32 +10,15 @@
         <link href="{{asset('css/animate.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
         <script src="{{asset('js/jquery-1.11.3.min.js')}}"></script>
-        <script src="{{asset('js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/wow.min.js')}}"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Brand</a>
-                {% if app.user %}
-                    Bonjour {{ app.user.username }}
-                {% endif %}
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Nos offres</a></li>
-                <li><a href="#">Le produit</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+        {% include "::navbar.html.twig" %}
+        {% if error is defined %}
+            {% if error %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endif %}
+        {% endif %}
          <section id="family" class="col-md-12">
             <div id="mini-game" class="row-centered">
                 <div class="col-md-8" style="float:none;margin:auto;">
@@ -114,7 +97,52 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog row-centered">
+                <div class="modal-content col-sm-12 col-centered signup">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Inscrivez-vous !</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <div id="login-error" class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </div> -->
+                        <form action="{{ path('mti_user_back_office_addtest') }}" method="post">
+                            <input type="text" id="username" name="_username" class="form-control" placeholder="Prenom"/> 
+                            <br/>
+                            <input type="text" id="lastname" name="_lastname" class="form-control" placeholder="Nom de famille"/> <br/>
+                            <input type="password" id="password" name="_password" placeholder="Password" class="form-control" /> <br>
+                            <input type="text" id="email" name="_email" placeholder="Email" class="form-control" /> <br>
+                            <input type="submit" value="S'inscrire" class="btn btn-primary" />
+                        </form><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog row-centered">
+                <div class="modal-content col-sm-12 col-centered signup">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Identifiez-vous !</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <div id="login-error" class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </div> -->
+                        <form action="{{ path('login_check') }}" method="post">
+                            <input type="text" id="username" name="_username" class="form-control" placeholder="Login"/> 
+                            <br/>
+                            <input type="password" type="password" id="password" name="_password" placeholder="Password" class="form-control" /> <br>
+                            <input type="submit" value="S'identifier" class="btn btn-primary" />
+                        </form><br>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script>
      new WOW().init();
     </script>
