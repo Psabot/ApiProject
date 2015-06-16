@@ -5,12 +5,16 @@ namespace MTI\LeBonCoinBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use MTI\LeBonCoinBundle\Tools\CheckUserCall;
 
 class DefaultController extends Controller
 {
 
     public function indexAction($name)
     {
+        $check = new CheckUserCall();
+        $check->test();
+        echo($check->osef);
         return $this->render('MTILeBonCoinBundle:Default:index.html.twig', array('name' => $name));
     }
 
