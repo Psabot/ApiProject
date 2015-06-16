@@ -331,44 +331,6 @@ class DefaultController extends Controller
             return $response;
         }
 
-        /*foreach($html->find('div[class=list-lbc]', 0)->find('a') as $element) {
-            $article_id = explode('.htm', $element->href);
-            $article_id = explode('/', $article_id[0]);
-            $article_id = $article_id[count($article_id) - 1];
-            $locations = explode('/', utf8_encode(trim($element->find('div[class=placement]', 0)->plaintext)));
-            if (count($locations) > 1) {
-                $town = trim($locations[0]);
-                $region = trim($locations[1]);
-            }
-            else {
-                $town = 'all';
-                $region = trim($locations[0]);
-            }
-            $price = $element->find('div[class=price]', 0);
-            if ($price != null) $price = preg_replace('/[^0-9]/', '', $price->plaintext);
-            $image = $element->find('img', 0);
-            $nb_images = 0;
-            if ($image != null) {
-                $image = $image->src;
-                $nb_images = $element->find('div[class=image-and-nb]', 0)->find('div[class=nb]', 0)->find('div[class=value radius]', 0)->plaintext;
-            }
-            $category = trim($element->find('div[class=category]', 0)->plaintext);
-
-            $article = array(
-                'ref' => $article_id,
-                'url' => $element->href,
-                'title' => utf8_encode($element->title),
-                'category' => ($category == "") ? $category_url : $category,
-                'region' => $region,
-                'town' => $town,
-                'price' => $price,
-                'image' => $image,
-                'nb_images' => $nb_images,
-                'date' => $element->find('div[class=date]', 0)->find('div', 0)->plaintext." ".$element->find('div[class=date]', 0)->find('div', 1)->plaintext
-            );
-            array_push($articles, $article);
-        }*/
-
         $price = $html->find('span[itemprop=price]', 0);
         if ($price != null) $price = $price->content;
         $date = $html->find('div[class=upload_by]', 0)->plaintext;
@@ -380,6 +342,30 @@ class DefaultController extends Controller
         $type = $html->find('div[class=upload_by]', 0)->plaintext;
         if (strpos($type,'Pro ') !== false) $type = 'pro';
         else $type = 'ind';
+        $image = $html->find('a[id=image]', 0);
+        if ($image != null) {
+            $image = explode('url(\'', $image->style)[1];
+            $image = explode('\');', $image)[0];
+            $nb_images = $html->find('div[class=thumbs_carousel_window]', 0);
+            if ($nb_images == null) {
+                $nb_images = 1;
+                $thumbs = array();
+            }
+            else {
+                $images_thumbs = $html->find('div[class=thumbs_carousel_window]', 0)->find('span[class=thumbs]');
+                $nb_images = count($images_thumbs);
+                $thumbs = array();
+                foreach($images_thumbs as $element) {
+                    $thumb = explode('url(\'', $element->style)[1];
+                    $thumb = explode('\');', $thumb)[0];
+                    array_push($thumbs, $thumb);
+                }
+            }
+        }
+        else {
+            $nb_images = 0;
+            $thumbs = array();
+        }
 
         $response = new Response();
         $response_json = json_encode(array(
@@ -394,7 +380,10 @@ class DefaultController extends Controller
             'title' => utf8_encode($html->find('h1[id=ad_subject]', 0)->plaintext),
             'price' => $price,
             'description' => utf8_encode($html->find('div[itemprop=description]', 0)->plaintext),
-            'date' => $date
+            'date' => $date,
+            'image' => $image,
+            'nb_images' => $nb_images,
+            'thumbs' => $thumbs
 
             //'request' => $request->query->get('name')
         ), JSON_UNESCAPED_SLASHES);
