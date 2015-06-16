@@ -20,9 +20,9 @@ class AppKernel extends Kernel
             new MTI\HelloWorldBundle\MTIHelloWorldBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Escape\WSSEAuthenticationBundle\EscapeWSSEAuthenticationBundle(),
             new MTI\ApiProjectHomeBundle\MTIApiProjectHomeBundle(),
             new MTI\UserBackOfficeBundle\MTIUserBackOfficeBundle(),
+            new MTI\LeBonCoinBundle\MTILeBonCoinBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,7 @@
+mti_le_bon_coin_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MTILeBonCoinBundle:Default:index }
+
+mti_le_bon_coin_homepage2:
+    path:     /leboncoin/get/ads/offers/
+    defaults: { _controller: MTILeBonCoinBundle:Default:offers }
