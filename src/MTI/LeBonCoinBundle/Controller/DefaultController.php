@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use MTI\LeBonCoinBundle\Tools\ParsingTools;
 
+define("COOKIE_FILE", "cookie.txt");
+
 class DefaultController extends Controller
 {
 
@@ -34,17 +36,18 @@ class DefaultController extends Controller
         if ($type_url != null) $request_url .= "&f=".$type_url;
         if ($query_url != null) $request_url .= "&q=".$query_url;
         //echo $request_url;
+
         $html = file_get_html($request_url);
 
         if ($html->find('h2[id=result_ad_not_found]', 0) != null) {
             $response = new Response();
-            $response->setContent("No results found");
+            $response->setContent(json_encode(array('error' => 'No results found')));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
         else if ($html->find('h1[id=result_ad_not_found_proaccount]', 0) != null) {
             $response = new Response();
-            $response->setContent("No professional results found");
+            $response->setContent(json_encode(array('error' => 'No professional results found')));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
@@ -185,13 +188,13 @@ class DefaultController extends Controller
 
         if ($html->find('h2[id=result_ad_not_found]', 0) != null) {
             $response = new Response();
-            $response->setContent("No results found");
+            $response->setContent(json_encode(array('error' => 'No results found')));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
         else if ($html->find('h1[id=result_ad_not_found_proaccount]', 0) != null) {
             $response = new Response();
-            $response->setContent("No professional results found");
+            $response->setContent(json_encode(array('error' => 'No professional results found')));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
@@ -319,14 +322,14 @@ class DefaultController extends Controller
             $html = file_get_html($request_url);
         } catch (Exception $e) {
             $response = new Response();
-            $response->setContent("No results found");
+            $response->setContent(json_encode(array('error' => 'No results found')));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
 
         if ($html->find('div[class=lbcContainer]', 0) == null) {
             $response = new Response();
-            $response->setContent("No results found");
+            $response->setContent(json_encode(array('error' => 'No results found')));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
@@ -389,6 +392,72 @@ class DefaultController extends Controller
         ), JSON_UNESCAPED_SLASHES);
         //echo json_decode($response_json);
         $response->setContent($response_json);
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function mailAction(Request $request, $adID) {
+        extract($_POST);
+
+        $name_post = $request->request->get('name');
+        $email_post = $request->request->get('email');
+        $phone_post = $request->request->get('phone');
+        $body_post = $request->request->get('body');
+
+        if ($name_post == null || $email_post == null || $body_post == null) {
+            $response = new Response();
+            $response->setContent(json_encode(array('error' => 'Please provide all required options to send the mail to the announcer')));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
+        //set POST variables
+        $url = 'http://www2.leboncoin.fr/ar/send/0?id='.$adID;
+        $fields = array(
+                'name' => urlencode($name_post),
+                'email' => urlencode($email_post),
+                'phone' => urlencode($phone_post),
+                'body' => urlencode($body_post),
+                'cc' => urlencode('1'),
+                'send' => urlencode('Envoyer')
+        );
+
+        //url-ify the data for the POST
+        $fields_string = '';
+        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
+
+        //open connection
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'http://www2.leboncoin.fr/ar/form/0?ca=12_s&id='.$adID);
+        curl_setopt($ch, CURLOPT_POST, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "");
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt ($ch, CURLOPT_COOKIEJAR, COOKIE_FILE);
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt ($ch, CURLOPT_COOKIEFILE, COOKIE_FILE);
+        curl_exec($ch);
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, count($fields));
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+
+        //execute post
+        $result = curl_exec($ch);
+        //echo $result;
+
+        //close connection
+        curl_close($ch);
+
+        $response = new Response();
+
+        //echo json_decode($response_json);
+        if ($result != false && strpos($result,'Votre message a &eacute;t&eacute; envoy&eacute; &agrave; l\'annonceur !') != false) $response->setContent(json_encode(array('success' => $name_post.'Mail succuessfully sent to the announcer')));
+        else $response->setContent(json_encode(array('error' => 'A problem occured while sending the mail sent to the announcer')));
 
         $response->headers->set('Content-Type', 'application/json');
         return $response;
