@@ -93,36 +93,33 @@
 			var target = document.getElementById('foo');
 			var gauge = new Gauge(target).setOptions(opts);
 			gauge.setTextField(document.getElementById("gauge-value"));
-			gauge.maxValue = 3000; // set max gauge value
-			gauge.animationSpeed = 22; // set animation speed (32 is default value)
-			gauge.set(2500); // set actual value
+			gauge.maxValue = 10; // set max gauge value
+			gauge.animationSpeed = 10; // set animation speed (32 is default value)
+			gauge.set({{ countcall[1] }}); // set actual value
+
+      var colors = ["#F7464A", "#FDB45C", "#46BFBD"];
 
       var data = [
-        {
-            value: 300,
-            color:"#F7464A",
-            highlight: "#FF5A5E",
-            label: "Red"
-        },
-        {
-            value: 50,
-            color: "#46BFBD",
-            highlight: "#5AD3D1",
-            label: "Green"
-        },
-        {
-            value: 100,
-            color: "#FDB45C",
-            highlight: "#FFC870",
-            label: "Yellow"
-        }
+          {% for key in calltype %}
+            {
+              value: {{ key['type'] }},
+              color: colors[Math.floor(Math.random()*colors.length)],
+              highlight: colors[Math.floor(Math.random()*colors.length)],
+              label: "{{ key[1] }}"
+            },
+          {% endfor %}
+        
       ]
       legend(document.getElementById('legend'), data);
       var ctx = document.getElementById("myChart").getContext("2d");
       var myDoughnutChart = new Chart(ctx).Doughnut(data);
 
     var data2 = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [
+          {% for key,value in datecount %}
+                        "{{ key }}",
+          {% endfor %}
+    ],
     datasets: [
         {
             label: "My First dataset",
@@ -132,17 +129,11 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: [
+            {% for key,value in datecount %}
+                        "{{ value }}",
+            {% endfor %}
+            ]
         }
     ]
 };

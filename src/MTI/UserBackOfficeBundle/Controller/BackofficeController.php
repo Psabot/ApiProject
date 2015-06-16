@@ -8,6 +8,7 @@ use MTI\UserBackOfficeBundle\Entity\Call;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class BackofficeController extends Controller
 {
@@ -16,7 +17,63 @@ class BackofficeController extends Controller
     	if (!$this->get('security.context')->isGranted('ROLE_USER')) {
 	      throw new AccessDeniedException('Accès limité aux utilisateurs enregistrés.');
 	    }
-        return $this->render('MTIUserBackOfficeBundle:Backoffice:index.html.twig');
+
+	    $user = $this->getUser();
+	    $em = $this->getDoctrine()->getManager();
+
+	    /*$rsm = new ResultSetMapping();
+		$rsm->addEntityResult('MTI\UserBackOfficeBundle\Entity\Call', 'call');
+		$rsm->addFieldResult('call', 'id', 'id');
+		$rsm->addFieldResult('call', 'created', 'created');
+
+		$query = $em->createNativeQuery('SELECT * FROM call c1 CROSS JOIN (SELECT call.created FROM call WHERE call.userid = ? GROUP BY call.created ORDER BY call.created ASC) as c2', $rsm);
+
+	    query = $em->createNativeQuery('SELECT call.id, call.created FROM call WHERE call.userid = ? ORDER BY call.created ASC', $rsm);
+		$query->setParameter(1,  $user->getId());*/
+
+		/*$query = $em->createNativeQuery('SELECT call.created, count(*) FROM (SELECT * FROM call WHERE call.userid = ?) AS osef GROUP BY call.created ORDER BY call.created ASC', $rsm);
+		$query->setParameter(1,  $user->getId());*/
+
+		// Calls type
+		$callTypesQuery = $em->createQuery(
+		    'SELECT call.type, count(call)
+		    FROM MTIUserBackOfficeBundle:Call call
+		    WHERE call.userid = :user
+		    GROUP BY call.type'
+		)->setParameter('user', $user->getId());
+
+		$callTypes = $callTypesQuery->getResult();
+
+		// Calls by date
+		$query = $em->createQuery(
+		    'SELECT call.created as createdDate
+		    FROM MTIUserBackOfficeBundle:Call call
+		    WHERE call.userid = :user
+		    ORDER BY createdDate ASC'
+		)->setParameter('user', $user->getId());
+		
+		$res = $query->getResult();
+
+		$dateCount = array();
+
+		foreach ($res as $r) {
+			$date = $r['createdDate']->format('d/m/Y');
+			if (array_key_exists($date, $dateCount))
+				$dateCount[$date] += 1;
+			else
+				$dateCount[$date] = 1;
+		}
+
+		// Total calls
+		$query2 = $em->createQuery(
+		    'SELECT count(call)
+		    FROM MTIUserBackOfficeBundle:Call call
+		    WHERE call.userid = :user'
+		)->setParameter('user', $user->getId());
+
+		$count = $query2->getSingleResult();
+
+        return $this->render('MTIUserBackOfficeBundle:Backoffice:index.html.twig', array('countcall' => $count, 'datecount' => $dateCount, 'calltype' => $callTypes));
     }
 
     public function createAction()
