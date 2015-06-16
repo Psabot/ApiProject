@@ -9,6 +9,4 @@ return array(
     $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
     $vendorDir . '/kriswallsmith/assetic/src/functions.php',
     $vendorDir . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/functions.php',
-    $vendorDir . '/simplehtmldom/simple_html_dom.php',
-    $vendorDir . '/leboncoin/custom.php',
 );
