@@ -56,7 +56,10 @@ class CheckUserCall extends Controller
 
 			$count = $query2->getSingleResult();
 
-			return ($count[1]+1 < $this->giveLimitation($profile->getSubscribe()));
+			if ($count[1]+1 < $this->giveLimitation($profile->getSubscribe()))
+				return $publicapikey;
+			else
+				return false;
 		}
 	}
 
