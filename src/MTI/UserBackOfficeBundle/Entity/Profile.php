@@ -24,10 +24,24 @@ class Profile implements UserInterface
 
     protected $secretapikey;
 
+    protected $subscribe;
+
     protected $roles= array();
 
     public function eraseCredentials()
     {
+    }
+
+    public function getSubscribe()
+    {
+        return $this->subscribe;
+    }
+
+    public function setSubscribe($subscribe)
+    {
+        $this->subscribe = $subscribe;
+
+        return $this;
     }
 
     public function getRoles()

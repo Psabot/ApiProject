@@ -12,9 +12,8 @@ class DefaultController extends Controller
 
     public function indexAction($name)
     {
-        $check = new CheckUserCall();
-        $check->test();
-        echo($check->osef);
+        $check = new CheckUserCall($this->getDoctrine());
+        var_dump($check->check());
         return $this->render('MTILeBonCoinBundle:Default:index.html.twig', array('name' => $name));
     }
 
