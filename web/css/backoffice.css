@@ -81,17 +81,25 @@ body
 #sidebar ul li:hover, #sidebar ul li:active
 {
 	background-color: #28282e;
-	color:#1DA879;
 	transition: all .3s ease-in-out;
+}
+
+#sidebar ul li a:hover, #sidebar ul li a:active
+{
+	color:#1DA879;
 }
 
 #sidebar ul li
 {
-	color:#FFFFFF;
-	font-size: 16px;
 	list-style-type: none;
 	padding: 15px;
 	border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+#sidebar ul li a
+{
+	color:#FFFFFF;
+	font-size: 16px;
 }
 
 #sidebar span 
@@ -134,4 +142,9 @@ body
 #myChart,  #myChart2
 {
 	margin-left: 20px;
+}
+
+.group-clear
+{
+	clear: both;
 }
