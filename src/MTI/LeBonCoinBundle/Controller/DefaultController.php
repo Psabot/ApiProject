@@ -5,6 +5,7 @@ namespace MTI\LeBonCoinBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use MTI\LeBonCoinBundle\Tools\CheckUserCall;
 use MTI\LeBonCoinBundle\Tools\ParsingTools;
 
 class DefaultController extends Controller

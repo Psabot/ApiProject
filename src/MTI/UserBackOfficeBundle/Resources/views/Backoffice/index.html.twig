@@ -84,6 +84,20 @@
                 <label class="col-sm-3 control-label">Email:</label>
                 <div class="col-sm-8">{{app.user.email}}</div>
               </div>
+              <div class="form-group group-clear">
+                <label class="col-sm-3 control-label">Forfait:</label>
+                <div class="col-sm-8">
+                  {% if app.user.subscribe == 1 %}
+                    Basique
+                  {% endif %}
+                  {% if app.user.subscribe == 2 %}
+                    Pro
+                  {% endif %}
+                  {% if app.user.subscribe == 3 %}
+                    Premium
+                  {% endif %}
+                </div>
+              </div>
             </div>
           </div>
         </div>
