@@ -29,4 +29,7 @@ MTI\UserBackOfficeBundle\Entity\Profile:
             length: 255
         roles:
             type: array
+        subscribe:
+            type: integer
+            length: 11
 

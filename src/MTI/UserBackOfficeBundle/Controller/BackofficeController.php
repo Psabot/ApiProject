@@ -73,7 +73,10 @@ class BackofficeController extends Controller
 
 		$count = $query2->getSingleResult();
 
-        return $this->render('MTIUserBackOfficeBundle:Backoffice:index.html.twig', array('countcall' => $count, 'datecount' => $dateCount, 'calltype' => $callTypes));
+		// Generate token -> base64(publickey:secretkey)
+		$token = base64_encode($user->getPublicapikey().':'.$user->getSecretapikey());
+
+        return $this->render('MTIUserBackOfficeBundle:Backoffice:index.html.twig', array('countcall' => $count, 'datecount' => $dateCount, 'calltype' => $callTypes, 'token' => $token));
     }
 
     public function createAction()
@@ -95,6 +98,7 @@ class BackofficeController extends Controller
 	    $profile->setPassword($password);
 	    $profile->setSalt("");
       	$profile->setRoles(array('ROLE_USER'));
+      	$profile->setSubscribe(1);
 	    
 
 	    $em = $this->getDoctrine()->getManager();
