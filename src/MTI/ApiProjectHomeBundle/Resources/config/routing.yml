@@ -1,3 +1,9 @@
-mti_api_project_home_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: MTIApiProjectHomeBundle:Default:index }
+login:
+    path:  /login
+    defaults:  { _controller: MTIApiProjectHomeBundle:Security:login }
+
+login_check:
+    path:   /login_check
+
+logout:
+    path:   /logout
