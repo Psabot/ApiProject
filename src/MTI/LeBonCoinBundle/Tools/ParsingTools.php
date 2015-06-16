@@ -2,6 +2,8 @@
 
 namespace MTI\LeBonCoinBundle\Tools;
 
+use MTI\UserBackOfficeBundle\Entity\Call;
+
 class ParsingTools
 {
     
@@ -96,4 +98,17 @@ class ParsingTools
         "covoiturage",
         "autres"
     );
+
+    public static function addRequest($context, $profile, $type) {
+        $call = new Call();
+
+        $user = $profile;
+
+        $call->setUserId($user->getId());
+        $call->setType($type);
+
+        $em = $context->getDoctrine()->getManager();
+        $em->persist($call);
+        $em->flush();
+    }
 }

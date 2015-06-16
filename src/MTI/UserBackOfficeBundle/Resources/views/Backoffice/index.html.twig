@@ -46,24 +46,30 @@
         <div id="bo-content" class="tab-content">
           <div role="tabpanel" id="dashboard" class="tab-pane fade active in" aria-labelledby="dashboard-tab">
             <div class="col-sm-3" id="limit">
+              <div style="padding: 6px 10px 30% 10px; background-color: white">
               <div class="chartcontainer">
                 <h3>Nombre d'appels</h3>
-            		<canvas id="foo"></canvas>
+            		<canvas id="foo" style="margin: 0; width: 100%"></canvas>
                 <div id="gauge-value"></div>
               </div>
-            </div>
-            <div class="col-sm-3" style="position:relative">
-              <div class="chartcontainer">
-                <h3 style="margin-bottom:27px;">Statistiques</h3>
-                <canvas id="myChart" width="150" height="150"></canvas>
-                <div id="legend"></div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4" style="position:relative">
+                <div style="padding: 0 10px 6% 10px; background-color: white; overflow: hidden">
+                <h3 style="margin-top: 32px; margin-bottom:27px; text-align: center">Statistiques</h3>
+              <div class="chartcontainer" style="width: 51%; float: left">
+                <canvas id="myChart" width="150" height="150" style="margin: 0"></canvas>
+              </div>
+              <div id="legend" style="width: 49%; float: right; margin: 20px 0 0 0; padding-left: 10%"></div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div style="padding: 0 10px 5% 10px; background-color: white">
               <div class="chartcontainer">
                 <h3 style="margin-bottom:27px;">Nombre d'appels</h3>
-                <canvas id="myChart2" width="550" height="150"></canvas>
+                <canvas id="myChart2" width="550" height="231" style="margin: 0"></canvas>
               </div>
+                </div>
             </div>
           </div>
           <div role="tabpanel" id="profile" class="tab-pane fade col-md-6" aria-labelledby="profile-tab">
@@ -105,8 +111,8 @@
 
     $('#sidebar a').click(function (e) {
       console.log("ok");
-      e.preventDefault()
-      $(this).tab('show')
+      e.preventDefault();
+      $(this).tab('show');
     })
         $('.fa-bars').click(function (){
             if ($('#sidebar').is(":visible") === true) {
@@ -116,6 +122,7 @@
               $('#bo-content').animate({
                 'margin-left':'0px', queue:false}, function(){console.log("ok");$('#sidebar').hide();}
               );
+              setTimeout(function(){ window.dispatchEvent(new Event('resize'));}, 400);
             } else {
                 $('#sidebar').show();
                 $('#sidebar').animate({
@@ -124,6 +131,7 @@
                 $('#bo-content').animate({
                   'margin-left': '240px'
                 },{queue:false});
+                setTimeout(function(){ window.dispatchEvent(new Event('resize'));}, 400);
             }
         });
 
@@ -144,18 +152,26 @@
 			var target = document.getElementById('foo');
 			var gauge = new Gauge(target).setOptions(opts);
 			gauge.setTextField(document.getElementById("gauge-value"));
-			gauge.maxValue = 10; // set max gauge value
+            {% if app.user.subscribe == 1 %}
+			     gauge.maxValue = 50; // set max gauge value
+            {% elseif app.user.subscribe == 2 %}
+                 gauge.maxValue = 200; // set max gauge value
+            {% elseif app.user.subscribe == 3 %}
+                 gauge.maxValue = 500; // set max gauge value
+            {% endif %}
 			gauge.animationSpeed = 10; // set animation speed (32 is default value)
 			gauge.set({{ countcall[1] }}); // set actual value
 
       var colors = ["#F7464A", "#FDB45C", "#46BFBD"];
 
+      var request_types = ['offres', 'offres part', 'offres pro', 'demandes', 'demandes part', 'demandes pro', 'annonce', 'mail', 'post'];
+
       var data = [
           {% for key in calltype %}
             {
-              value: {{ key['type'] }},
+              value: {{ key[1] }},
               color: colors[Math.floor(Math.random()*colors.length)],
-              label: "{{ key[1] }}"
+              label: request_types[{{ key['type'] }}]
             },
           {% endfor %}
         

@@ -22,6 +22,20 @@ class DefaultController extends Controller
 
     public function offersAction(Request $request)
     {
+        $token_url = $request->query->get('token');
+        $checkUserCall = new CheckUserCall($this->getDoctrine());
+        $profile = $checkUserCall->check($token_url);
+
+        if (is_string($profile)) {
+            $response = new Response();
+            if ($profile == 'errorTokenMissing') $response->setContent(json_encode(array('error' => 'Please provide your user token')));
+            else if ($profile == 'errorBadToken') $response->setContent(json_encode(array('error' => 'Please provide a token with valid format')));
+            else if ($profile == 'errorNoAccount') $response->setContent(json_encode(array('error' => 'No matching account for this token')));
+            else $response->setContent(json_encode(array('error' => 'You have reach your request limit')));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
         $region_url = (!in_array($request->query->get('region'), ParsingTools::$regions_map)) ? "ile_de_france" : $request->query->get('region');
         $category_url = (!in_array($request->query->get('category'), ParsingTools::$categories_map)) ? "annonces" : $request->query->get('category');
         $towns_url = $request->query->get('towns');
@@ -163,13 +177,31 @@ class DefaultController extends Controller
         ), JSON_UNESCAPED_SLASHES);
         //echo json_decode($response_json);
         $response->setContent($response_json);
-
         $response->headers->set('Content-Type', 'application/json');
+
+        $request_type = ($type_url == 'p') ? 1 : (($type_url == 'c') ? 2 : 0);
+
+        ParsingTools::addRequest($this, $profile, $request_type);
+
         return $response;
     }
 
     public function demandsAction(Request $request)
     {
+        $token_url = $request->query->get('token');
+        $checkUserCall = new CheckUserCall($this->getDoctrine());
+        $profile = $checkUserCall->check($token_url);
+        
+        if (is_string($profile)) {
+            $response = new Response();
+            if ($profile == 'errorTokenMissing') $response->setContent(json_encode(array('error' => 'Please provide your user token')));
+            else if ($profile == 'errorBadToken') $response->setContent(json_encode(array('error' => 'Please provide a token with valid format')));
+            else if ($profile == 'errorNoAccount') $response->setContent(json_encode(array('error' => 'No matching account for this token')));
+            else $response->setContent(json_encode(array('error' => 'You have reach your request limit')));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
         $region_url = (!in_array($request->query->get('region'), ParsingTools::$regions_map)) ? "ile_de_france" : $request->query->get('region');
         $category_url = (!in_array($request->query->get('category'), ParsingTools::$categories_map)) ? "annonces" : $request->query->get('category');
         $towns_url = $request->query->get('towns');
@@ -310,13 +342,31 @@ class DefaultController extends Controller
         ), JSON_UNESCAPED_SLASHES);
         //echo json_decode($response_json);
         $response->setContent($response_json);
-
         $response->headers->set('Content-Type', 'application/json');
+
+        $request_type = ($type_url == 'p') ? 4 : (($type_url == 'c') ? 5 : 3);
+
+        ParsingTools::addRequest($this, $profile, $request_type);
+
         return $response;
     }
 
     public function adsAction(Request $request, $adID)
     {
+        $token_url = $request->query->get('token');
+        $checkUserCall = new CheckUserCall($this->getDoctrine());
+        $profile = $checkUserCall->check($token_url);
+        
+        if (is_string($profile)) {
+            $response = new Response();
+            if ($profile == 'errorTokenMissing') $response->setContent(json_encode(array('error' => 'Please provide your user token')));
+            else if ($profile == 'errorBadToken') $response->setContent(json_encode(array('error' => 'Please provide a token with valid format')));
+            else if ($profile == 'errorNoAccount') $response->setContent(json_encode(array('error' => 'No matching account for this token')));
+            else $response->setContent(json_encode(array('error' => 'You have reach your request limit')));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
         $request_url = 'http://www.leboncoin.fr/annonces/'.$adID.".htm";
         //echo $request_url;
         try {
@@ -377,8 +427,8 @@ class DefaultController extends Controller
             'ads' => $ads,
             'type' => $type,
             'user' => utf8_encode($html->find('div[class=upload_by]', 0)->find('a', 0)->plaintext),
-            'region' => $html->find('span[class=fine_print]', 0)->find('a', 1)->plaintext,
-            'town' => $html->find('td[itemprop=addressLocality]', 0)->plaintext,
+            'region' => utf8_encode($html->find('span[class=fine_print]', 0)->find('a', 1)->plaintext),
+            'town' => utf8_encode($html->find('td[itemprop=addressLocality]', 0)->plaintext),
             'postal' => $html->find('td[itemprop=postalCode]', 0)->plaintext,
             'category' => $html->find('span[class=fine_print]', 0)->find('a', 2)->plaintext,
             'title' => utf8_encode($html->find('h1[id=ad_subject]', 0)->plaintext),
@@ -393,13 +443,29 @@ class DefaultController extends Controller
         ), JSON_UNESCAPED_SLASHES);
         //echo json_decode($response_json);
         $response->setContent($response_json);
-
         $response->headers->set('Content-Type', 'application/json');
+
+        ParsingTools::addRequest($this, $profile, 6);
+
         return $response;
     }
 
     public function mailAction(Request $request, $adID) {
         extract($_POST);
+
+        $token_url = $request->query->get('token');
+        $checkUserCall = new CheckUserCall($this->getDoctrine());
+        $profile = $checkUserCall->check($token_url);
+        
+        if (is_string($profile)) {
+            $response = new Response();
+            if ($profile == 'errorTokenMissing') $response->setContent(json_encode(array('error' => 'Please provide your user token')));
+            else if ($profile == 'errorBadToken') $response->setContent(json_encode(array('error' => 'Please provide a token with valid format')));
+            else if ($profile == 'errorNoAccount') $response->setContent(json_encode(array('error' => 'No matching account for this token')));
+            else $response->setContent(json_encode(array('error' => 'You have reach your request limit')));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
 
         $name_post = $request->request->get('name');
         $email_post = $request->request->get('email');
@@ -457,10 +523,13 @@ class DefaultController extends Controller
         $response = new Response();
 
         //echo json_decode($response_json);
-        if ($result != false && strpos($result,'Votre message a &eacute;t&eacute; envoy&eacute; &agrave; l\'annonceur !') != false) $response->setContent(json_encode(array('success' => $name_post.'Mail succuessfully sent to the announcer')));
+        if ($result != false && strpos($result,'Votre message a &eacute;t&eacute; envoy&eacute; &agrave; l\'annonceur !') != false) $response->setContent(json_encode(array('success' => 'Mail succuessfully sent to the announcer')));
         else $response->setContent(json_encode(array('error' => 'A problem occured while sending the mail sent to the announcer')));
 
         $response->headers->set('Content-Type', 'application/json');
+
+        ParsingTools::addRequest($this, $profile, 7);
+
         return $response;
     }
 }

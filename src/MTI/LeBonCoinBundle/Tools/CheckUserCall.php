@@ -11,14 +11,13 @@ class CheckUserCall extends Controller
         $this->doctrine = $doctrine;
     }
 
-	public function check()
+	public function check($token)
 	{
-		//$token = $request->headers->get('host');
-		$token = "TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=";
+		if ($token == null) return "errorTokenMissing";
 		$tokendecode = base64_decode($token);
 		$pos = strpos(':', $tokendecode);
 		if($pos > 0)
-			return false;
+			return "errorBadToken";
 		else
 		{
 			$keys = explode(':',$tokendecode);
@@ -41,9 +40,7 @@ class CheckUserCall extends Controller
 			$profile = $query->getResult();
 
 		    if (!$profile) {
-		        throw $this->createNotFoundException(
-		            'Aucun profil trouvé pour ces clés d\'api'
-		        );
+		        return "errorNoAccount";
 		    }
 		    else
 		    	$profile = $profile[0];
@@ -56,10 +53,10 @@ class CheckUserCall extends Controller
 
 			$count = $query2->getSingleResult();
 
-			if ($count[1]+1 < $this->giveLimitation($profile->getSubscribe()))
-				return $apipublickey;
+			if ($count[1] < $this->giveLimitation($profile->getSubscribe()))
+				return $profile;
 			else
-				return false;
+				return "errorLimit";
 		}
 	}
 
@@ -67,13 +64,13 @@ class CheckUserCall extends Controller
 	{
 		switch ($type) {
 			case 1:
-				return 10;
+				return 50;
 				break;
 			case 2:
-				return 20;
+				return 200;
 				break;
 			case 3:
-				return 30;
+				return 500;
 				break;
 			default:
 				return 10;

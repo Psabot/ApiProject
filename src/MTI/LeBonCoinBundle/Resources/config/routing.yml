@@ -11,10 +11,10 @@ mti_le_bon_coin_homepage3:
     defaults: { _controller: MTILeBonCoinBundle:Default:demands }
 
 mti_le_bon_coin_homepage4:
-    path:     /leboncoin/get/ads/{adID}
+    path:     /leboncoin/get/ads/{adID}/
     defaults: { _controller: MTILeBonCoinBundle:Default:ads }
 
 mti_le_bon_coin_homepage5:
-    path:     /leboncoin/post/mail/{adID}
+    path:     /leboncoin/post/mail/{adID}/
     defaults: { _controller: MTILeBonCoinBundle:Default:mail }
     methods:  [POST]
