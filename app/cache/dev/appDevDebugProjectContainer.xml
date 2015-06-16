@@ -20,9 +20,9 @@
       <parameter key="MTIHelloWorldBundle">MTI\HelloWorldBundle\MTIHelloWorldBundle</parameter>
       <parameter key="FOSRestBundle">FOS\RestBundle\FOSRestBundle</parameter>
       <parameter key="JMSSerializerBundle">JMS\SerializerBundle\JMSSerializerBundle</parameter>
-      <parameter key="EscapeWSSEAuthenticationBundle">Escape\WSSEAuthenticationBundle\EscapeWSSEAuthenticationBundle</parameter>
       <parameter key="MTIApiProjectHomeBundle">MTI\ApiProjectHomeBundle\MTIApiProjectHomeBundle</parameter>
       <parameter key="MTIUserBackOfficeBundle">MTI\UserBackOfficeBundle\MTIUserBackOfficeBundle</parameter>
+      <parameter key="MTILeBonCoinBundle">MTI\LeBonCoinBundle\MTILeBonCoinBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -644,11 +644,6 @@
     <parameter key="jms_serializer.doctrine_proxy_subscriber.class">JMS\Serializer\EventDispatcher\Subscriber\DoctrineProxySubscriber</parameter>
     <parameter key="jms_serializer.stopwatch_subscriber.class">JMS\SerializerBundle\Serializer\StopwatchEventSubscriber</parameter>
     <parameter key="jms_serializer.infer_types_from_doctrine_metadata">true</parameter>
-    <parameter key="escape_wsse_authentication.provider.class">Escape\WSSEAuthenticationBundle\Security\Core\Authentication\Provider\Provider</parameter>
-    <parameter key="escape_wsse_authentication.listener.class">Escape\WSSEAuthenticationBundle\Security\Http\Firewall\Listener</parameter>
-    <parameter key="escape_wsse_authentication.entry_point.class">Escape\WSSEAuthenticationBundle\Security\Http\EntryPoint\EntryPoint</parameter>
-    <parameter key="escape_wsse_authentication.encoder.class">Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder</parameter>
-    <parameter key="escape_wsse_authentication.nonce_cache.class">Doctrine\Common\Cache\PhpFileCache</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -1869,12 +1864,12 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>557f5ccfe8b7e</argument>
+            <argument>557ff55571317</argument>
           </service>
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>557f5ccfe8b7e</argument>
+            <argument>557ff55571317</argument>
           </service>
         </argument>
       </argument>
@@ -2114,7 +2109,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>557f5ccfe8b7e</argument>
+            <argument>557ff55571317</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2158,7 +2153,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>557f5ccfe8b7e</argument>
+            <argument>557ff55571317</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3233,31 +3228,6 @@
       <tag name="jms_serializer.serialization_visitor" format="yml"/>
       <argument type="service" id="jms_serializer.naming_strategy"/>
     </service>
-    <service id="escape_wsse_authentication.provider" class="Escape\WSSEAuthenticationBundle\Security\Core\Authentication\Provider\Provider">
-      <argument>null</argument>
-      <argument>null</argument>
-      <argument>null</argument>
-      <argument>null</argument>
-      <argument>300</argument>
-      <argument>/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/</argument>
-    </service>
-    <service id="escape_wsse_authentication.listener" class="Escape\WSSEAuthenticationBundle\Security\Http\Firewall\Listener">
-      <argument type="service" id="security.context"/>
-      <argument type="service" id="security.authentication.manager"/>
-    </service>
-    <service id="escape_wsse_authentication.entry_point" class="Escape\WSSEAuthenticationBundle\Security\Http\EntryPoint\EntryPoint">
-      <argument type="service" id="logger"/>
-      <argument>null</argument>
-      <argument>UsernameToken</argument>
-    </service>
-    <service id="escape_wsse_authentication.encoder" class="Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder">
-      <argument>sha1</argument>
-      <argument>true</argument>
-      <argument>1</argument>
-    </service>
-    <service id="escape_wsse_authentication.nonce_cache" class="Doctrine\Common\Cache\PhpFileCache">
-      <argument>C:\wamp\www\SymfonyProject\app\cache\dev/security/nonces</argument>
-    </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
@@ -3615,6 +3585,10 @@
         <argument>MTIUserBackOffice</argument>
       </call>
       <call method="addPath">
+        <argument>C:\wamp\www\SymfonyProject\src\MTI\LeBonCoinBundle/Resources/views</argument>
+        <argument>MTILeBonCoin</argument>
+      </call>
+      <call method="addPath">
         <argument>C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -3751,9 +3725,9 @@
                       <argument key="MTI\HelloWorldBundle">C:\wamp\www\SymfonyProject\src\MTI\HelloWorldBundle/Resources/config/serializer</argument>
                       <argument key="FOS\RestBundle">C:\wamp\www\SymfonyProject\vendor\friendsofsymfony\rest-bundle\FOS\RestBundle/Resources/config/serializer</argument>
                       <argument key="JMS\SerializerBundle">C:\wamp\www\SymfonyProject\vendor\jms\serializer-bundle\JMS\SerializerBundle/Resources/config/serializer</argument>
-                      <argument key="Escape\WSSEAuthenticationBundle">C:\wamp\www\SymfonyProject\vendor\escapestudios\wsse-authentication-bundle\Escape\WSSEAuthenticationBundle/Resources/config/serializer</argument>
                       <argument key="MTI\ApiProjectHomeBundle">C:\wamp\www\SymfonyProject\src\MTI\ApiProjectHomeBundle/Resources/config/serializer</argument>
                       <argument key="MTI\UserBackOfficeBundle">C:\wamp\www\SymfonyProject\src\MTI\UserBackOfficeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\LeBonCoinBundle">C:\wamp\www\SymfonyProject\src\MTI\LeBonCoinBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\DebugBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\SymfonyProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
@@ -3780,9 +3754,9 @@
                       <argument key="MTI\HelloWorldBundle">C:\wamp\www\SymfonyProject\src\MTI\HelloWorldBundle/Resources/config/serializer</argument>
                       <argument key="FOS\RestBundle">C:\wamp\www\SymfonyProject\vendor\friendsofsymfony\rest-bundle\FOS\RestBundle/Resources/config/serializer</argument>
                       <argument key="JMS\SerializerBundle">C:\wamp\www\SymfonyProject\vendor\jms\serializer-bundle\JMS\SerializerBundle/Resources/config/serializer</argument>
-                      <argument key="Escape\WSSEAuthenticationBundle">C:\wamp\www\SymfonyProject\vendor\escapestudios\wsse-authentication-bundle\Escape\WSSEAuthenticationBundle/Resources/config/serializer</argument>
                       <argument key="MTI\ApiProjectHomeBundle">C:\wamp\www\SymfonyProject\src\MTI\ApiProjectHomeBundle/Resources/config/serializer</argument>
                       <argument key="MTI\UserBackOfficeBundle">C:\wamp\www\SymfonyProject\src\MTI\UserBackOfficeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\LeBonCoinBundle">C:\wamp\www\SymfonyProject\src\MTI\LeBonCoinBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\DebugBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\SymfonyProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
@@ -3809,9 +3783,9 @@
                       <argument key="MTI\HelloWorldBundle">C:\wamp\www\SymfonyProject\src\MTI\HelloWorldBundle/Resources/config/serializer</argument>
                       <argument key="FOS\RestBundle">C:\wamp\www\SymfonyProject\vendor\friendsofsymfony\rest-bundle\FOS\RestBundle/Resources/config/serializer</argument>
                       <argument key="JMS\SerializerBundle">C:\wamp\www\SymfonyProject\vendor\jms\serializer-bundle\JMS\SerializerBundle/Resources/config/serializer</argument>
-                      <argument key="Escape\WSSEAuthenticationBundle">C:\wamp\www\SymfonyProject\vendor\escapestudios\wsse-authentication-bundle\Escape\WSSEAuthenticationBundle/Resources/config/serializer</argument>
                       <argument key="MTI\ApiProjectHomeBundle">C:\wamp\www\SymfonyProject\src\MTI\ApiProjectHomeBundle/Resources/config/serializer</argument>
                       <argument key="MTI\UserBackOfficeBundle">C:\wamp\www\SymfonyProject\src\MTI\UserBackOfficeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\LeBonCoinBundle">C:\wamp\www\SymfonyProject\src\MTI\LeBonCoinBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\DebugBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\SymfonyProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
