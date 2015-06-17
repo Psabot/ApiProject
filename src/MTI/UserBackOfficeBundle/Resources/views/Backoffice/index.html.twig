@@ -77,12 +77,19 @@
               </div>
                 </div>
             </div>
-            <div class="col-sm-12" style="margin-top: 25px; margin-bottom: 50px">
+            <div class="col-sm-5"  style="margin-top: 25px; margin-bottom: 50px">
+                <div style="padding: 0 10px 5% 10px; background-color: white">
+              <div class="chartcontainer"> 
+                <h3 style="margin-bottom:27px;">Top 6 categories</h3>
+                <canvas id="myChart3"></canvas>
+              </div>
+                </div>
+            </div>
+            <div class="col-sm-7" style="margin-top: 25px; margin-bottom: 50px">
                 <div style="padding: 0; margin: 0; background-color: white; overflow: hidden">
                   <div id="regions_div" style="height: 500px; float: right; margin-top: -5px"></div>
                 </div>
             </div>
-          </div>
           <div role="tabpanel" id="profile" class="tab-pane fade" aria-labelledby="profile-tab">
             <div class="col-md-5">
               <div class="panel panel-default" id="profile-settings" style="padding-left:0px;padding-right:0px;">
@@ -208,17 +215,11 @@
     </div>
 		<script type="text/javascript">
 
+        var categories_match = ["All", "Offres emploie", "Voitures", "Motos", "Caravaning", "Utilitaires", "Equipement auto", "Equipement moto", "Equipement caravaning", "Nautisme", "Equipement nautisme", "Ventes immobilieres", "Locations", "Colocations", "Bureaux commerces", "Locations gites", "Chambres hotes", "Campings", "Hotels", "Hebergements insolites", "Informatique", "Consoles jeux video", "Image son", "Telephonie", "Ameublement", "Electromenager", "Arts de la table", "Decoration", "Linge de maison", "Bricolage", "Jardinage", "Vetements", "Chaussures", "Accessoires bagagerie", "Montres bijoux", "Equipement bebe", "Dvd films", "Cd musique", "Livres", "Animaux", "Velos", "Sports hobbies", "Instruments de musique", "Collection", "Jeux jouets", "Vins gastronomie", "Materiel agricole", "Transport manutention", "Chantier gros oeuvre", "Outillage materiaux", "Equipements industriels", "Restauration hotellerie", "Fournitures de bureau", "Commerces marches", "Materiel medical", "Prestations de services", "Billetterie", "Evenements", "Cours particuliers", "Covoiturage", "Autres"];
+
         google.setOnLoadCallback(drawRegionsMap);
 
       function drawRegionsMap() {
-
-        /*var data = google.visualization.arrayToDataTable([
-            ['Province', 'Popularity'],
-            ['Ile-de-France', 200],
-            ['Alsace', 300],
-            ['Aquitaine', 400],
-            ['Guyane', 1000],
-        ]);*/
 
         var data = [
             ['Province', 'Popularity'],
@@ -338,6 +339,30 @@
 };
  var ctx2 = document.getElementById("myChart2").getContext("2d");
     var myLineChart = new Chart(ctx2).Line(data2);
+
+    var data3 = {
+    labels: [
+          {% for key in callcategory %}
+                categories_match[{{ key['category'] }}],
+          {% endfor %}
+    ],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [
+            {% for key in callcategory %}
+                        {{ key['calls'] }},
+            {% endfor %}
+            ]
+        }
+    ]
+};
+ var ctx3 = document.getElementById("myChart3").getContext("2d");
+    var myBarChart = new Chart(ctx3).Bar(data3);
 		</script>
 	</body>
 </html>

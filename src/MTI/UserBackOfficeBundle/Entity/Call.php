@@ -18,6 +18,8 @@ class Call
 
     protected $region = null;
 
+    protected $category = null;
+
 
     /**
      * Get id
@@ -101,6 +103,29 @@ class Call
     public function getRegion()
     {
         return $this->region;
+    }
+
+    /**
+     * Set category
+     *
+     * @param integer $category
+     * @return Call
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return integer 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**

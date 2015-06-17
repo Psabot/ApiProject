@@ -66,6 +66,7 @@ class ParsingTools
     );
 
     public static $categories_map = array(
+        "annonces",
         "offres_d_emploi",
         "voitures",
         "motos",
@@ -128,7 +129,7 @@ class ParsingTools
         "autres"
     );
 
-    public static function addRequest($context, $profile, $type, $region) {
+    public static function addRequest($context, $profile, $type, $region, $category) {
         $call = new Call();
 
         $user = $profile;
@@ -136,6 +137,7 @@ class ParsingTools
         $call->setUserId($user->getId());
         $call->setType($type);
         $call->setRegion($region);
+        $call->setCategory($category);
 
         $em = $context->getDoctrine()->getManager();
         $em->persist($call);
