@@ -47,6 +47,11 @@
                 <i class="fa fa-cube"><span>MonBonCoin</span></i>
               </a>
             </li>
+            <li role="presentation">
+              <a href="#mondepot" id="mondepot-tab" role="tab" data-toggle="tab" aria-controls="depot">
+                <i class="fa fa-plus"><span>MonDépôt</span></i>
+              </a>
+            </li>
           </ul>
         </div>
         <div id="bo-content" class="tab-content">
@@ -176,12 +181,51 @@
         </div>
         </div>
         <div role="tabpanel" id="monboncoin" class="tab-pane fade" aria-labelledby="monboncoin-tab">
-          <div id="annonces" class="col-md-3">
+          <div id="annonces" class="col-md-4">
+            <div class="col-md-6">
+              <select class="form-control col-md-6" name="region">
+                <option value="all">Toute la France</option>
+                <option value="alsace">Alsace</option>
+                <option value="auvergne">Auvergne</option>
+                <option value="basse_normandie">Basse normandie</option>
+                <option value="bourgogne">Bourgogne</option>
+                <option value="bretagne">Bretagne</option>
+                <option value="centre">Centre</option>
+                <option value="champagne_ardenne">Champagne ardenne</option>
+                <option value="corse">Corse</option>
+                <option value="franche_comte">Franche compté</option>
+                <option value="haute_normandie">Haute normandie</option>
+                <option value="ile_de_france">Ile de france</option>
+                <option value="languedoc_roussillon">Languedoc roussillon</option>
+                <option value="limousin">Limousin</option>
+                <option value="lorraine">Lorraine</option>
+                <option value="midi_pyrenees">Midi pyrenées</option>
+                <option value="nord_pas_de_calais">Nord pas de calais</option>
+                <option value="pays_de_la_loire">Pays de la loire</option>
+                <option value="poitou_charentes">Poitou charentes</option>
+                <option value="provence_alpes_cote_d_azur">Provence alpes code d'azur</option>
+                <option value="rhone_alpes">Rhône alpes</option>
+                <option value="guadeloupe">Guadeloupe</option>
+                <option value="martinique">Martinique</option>
+                <option value="guyane">Guyane</option>
+                <option value="reunion">Reunion</option>
+              </select>
+            </div>
+             <div class="input-group col-md-6">
+              <input type="text" class="form-control" name="usersearchfield" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default searchAnnonces" type="button">Go!</button>
+              </span>
+            </div>
+            <div id="allannonces"></div>
           </div>
-          <div id="annonce" class="col-md-8 col-md-offset-4">
+          <div id="annonce" class="col-md-7 col-md-offset-5">
           </div>
           <script type="text/javascript">
-            $.getJSON("{{ path('mti_le_bon_coin_homepage2') }}?token={{ token }}", function(data) {
+
+          var getArticles = function ($url)
+          {
+            $.getJSON($url, function(data) {
               $.each(data['articles'], function(index, value){
                 var str = "<div id='"+value['ref']+"' class='annoncesList'>"; 
                   str += "<a href='' class='displayAnnonce'>";
@@ -192,9 +236,9 @@
                   str += "<span class='date'>"+value['date']+"</span>";
                   if(value['price']) str += "<span class='label label-price'>"+value['price']+"€</span>";
                 str += "</div>";
-                $("#annonces").append(str);
+                $("#allannonces").append(str);
               });
-              $('#annonces a').click(function (e) {
+              $('#allannonces a').click(function (e) {
                 e.preventDefault();
                 var ref = $(this).parent().attr('id');
                 var placeholderurl = "{{ path('mti_le_bon_coin_homepage4', { 'adID': 'placeholder' }) }}?token={{ token }}";
@@ -248,7 +292,13 @@
                 });
               });
             });
+          }
+          
+          getArticles("{{ path('mti_le_bon_coin_homepage2') }}?token={{ token }}");
           </script>
+        </div>
+        <div role="tabpanel" id="mondepot" class="tab-pane fade" aria-labelledby="mondepot-tab">
+          Depottttttttt
         </div>
     </div>
 		<script type="text/javascript">
@@ -294,6 +344,14 @@
           else
             $('.contact').append('<div class="alert alert-error" role="alert">'+data['error']+'</div>');
         }, "json");
+      });
+
+      $(document).on( "click", ".searchAnnonces", function(event) {
+        var s = $('input[name=usersearchfield]').val();
+        var region = $("select[name=region]").val();
+        event.preventDefault();
+        $("#allannonces").empty();
+        getArticles("{{ path('mti_le_bon_coin_homepage2') }}?token={{ token }}&query="+s+"&region="+region);
       });
 
       $(document).on( "click", "#annonce a", function(event) {
