@@ -579,7 +579,7 @@ class DefaultController extends Controller
         $price_post = $request->request->get('price');
         $passwd_post = $request->request->get('passwd');
 
-        if ($passwd_post == null || $category_post == null || $company_ad_post == null || $type_post == null || $region_post == null || $dpt_code_post == null || $zipcode_post == null || $city_post == null || $name_post == null || $email_post == null || $phone_post == null || $phone_hidden_post == null || $no_salesmen_post == null || $subject_post == null || $body_post == null) {
+        if ($passwd_post == null || $category_post == null || $company_ad_post == null || $type_post == null || $region_post == null || $dpt_code_post == null || $zipcode_post == null || $city_post == null || $name_post == null || $email_post == null || $phone_post == null || $subject_post == null || $body_post == null) {
             $response = new Response();
             $response->setContent(json_encode(array('error' => 'Please provide all required options to publish a new ad')));
             $response->headers->set('Content-Type', 'application/json');
@@ -599,8 +599,8 @@ class DefaultController extends Controller
             'name' => urlencode($name_post),
             'email' => urlencode($email_post),
             'phone' => urlencode($phone_post),
-            'phone_hidden' => urlencode($phone_hidden_post),
-            'no_salesmen' => urlencode($no_salesmen_post),
+            'phone_hidden' => ($phone_hidden_post == null) ? null : urlencode($phone_hidden_post),
+            'no_salesmen' => ($no_salesmen_post == null) ? null : urlencode($no_salesmen_post),
             'subject' => urlencode($subject_post),
             'body' => urlencode($body_post),
             'price' => ($price_post == null) ? null : urlencode($price_post),

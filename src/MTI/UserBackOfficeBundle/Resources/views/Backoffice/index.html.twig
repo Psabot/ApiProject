@@ -263,7 +263,7 @@
                       str2 += "<div class='sendingResponse'></div>";
                       str2 += "<div class='innerContact'>";
                         str2 += "<h3>Envoyer un mail à "+data['user']+"</h3>"
-                        str2+='<form action="'+actionurl+'" method="post">';
+                        str2+='<form action="'+actionurl+'" method="post" id="form-mail">';
                           str2+='<input type="hidden" name="token" value="TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=" />';
                           str2+='<input type="text" id="name" name="name" class="form-control" placeholder="Prenom"/> <br/>';
                           str2+='<input type="text" id="email" name="email" placeholder="Email" class="form-control" /> <br/>';
@@ -297,8 +297,134 @@
           getArticles("{{ path('mti_le_bon_coin_homepage2') }}?token={{ token }}");
           </script>
         </div>
-        <div role="tabpanel" id="mondepot" class="tab-pane fade" aria-labelledby="mondepot-tab">
-          Depottttttttt
+        <div role="tabpanel" id="mondepot" class="tab-pane fade" aria-labelledby="mondepot-tab" style="margin-bottom: 100px">
+          <div class="contact" style="border: none; width: 500px">
+              <div class='sendingResponse'></div>
+              <div class='innerContact-post'>
+                <h3>Publier une annonce</h3><br>
+                <form action="{{ path('mti_le_bon_coin_homepage6') }}?token={{ token }}" method="post" id="form-post">
+                    <select class="form-control" name="category">
+                        <option value="0">Choisissez la catégorie</option>
+                        <option value="71" style="background-color:#dcdcc3" disabled="" id="cat71">-- EMPLOI --</option>
+                        <option value="33" id="cat33">Offres d'emploi</option>
+                        <option value="1" style="background-color:#dcdcc3" disabled="" id="cat1">-- VEHICULES --</option>
+                        <option value="2" id="cat2">Voitures</option>
+                        <option value="3" id="cat3">Motos</option>
+                        <option value="4" id="cat4">Caravaning</option>
+                        <option value="5" id="cat5">Utilitaires</option>
+                        <option value="6" id="cat6">Equipement Auto</option>
+                        <option value="44" id="cat44">Equipement Moto</option>
+                        <option value="50" id="cat50">Equipement Caravaning</option>
+                        <option value="7" id="cat7">Nautisme</option>
+                        <option value="51" id="cat51">Equipement Nautisme</option>
+                        <option value="8" style="background-color:#dcdcc3" disabled="" id="cat8">-- IMMOBILIER --</option>
+                        <option value="9" id="cat9">Ventes immobilières</option>
+                        <option value="10" id="cat10">Locations</option>
+                        <option value="11" id="cat11">Colocations</option>
+                        <option value="13" id="cat13">Bureaux &amp; Commerces</option>
+                        <option value="66" style="background-color:#dcdcc3" disabled="" id="cat66">-- VACANCES --</option>
+                        <option value="12" id="cat12">Locations &amp; Gîtes</option>
+                        <option value="67" id="cat67">Chambres d'hôtes</option>
+                        <option value="68" id="cat68">Campings</option>
+                        <option value="69" id="cat69">Hôtels</option>
+                        <option value="70" id="cat70">Hébergements insolites</option>
+                        <option value="14" style="background-color:#dcdcc3" disabled="" id="cat14">-- MULTIMEDIA --</option>
+                        <option value="15" id="cat15">Informatique</option>
+                        <option value="43" id="cat43">Consoles &amp; Jeux vidéo</option>
+                        <option value="16" id="cat16">Image &amp; Son</option>
+                        <option value="17" id="cat17">Téléphonie</option>
+                        <option value="18" style="background-color:#dcdcc3" disabled="" id="cat18">-- MAISON --</option>
+                        <option value="19" id="cat19">Ameublement</option>
+                        <option value="20" id="cat20">Electroménager</option>
+                        <option value="45" id="cat45">Arts de la table</option>
+                        <option value="39" id="cat39">Décoration</option>
+                        <option value="46" id="cat46">Linge de maison</option>
+                        <option value="21" id="cat21">Bricolage</option>
+                        <option value="52" id="cat52">Jardinage</option>
+                        <option value="22" id="cat22">Vêtements</option>
+                        <option value="53" id="cat53">Chaussures</option>
+                        <option value="47" id="cat47">Accessoires &amp; Bagagerie</option>
+                        <option value="42" id="cat42">Montres &amp; Bijoux</option>
+                        <option value="23" id="cat23">Equipement bébé</option>
+                        <option value="54" id="cat54">Vêtements bébé</option>
+                        <option value="24" style="background-color:#dcdcc3" disabled="" id="cat24">-- LOISIRS --</option>
+                        <option value="25" id="cat25">DVD / Films</option>
+                        <option value="26" id="cat26">CD / Musique</option>
+                        <option value="27" id="cat27">Livres</option>
+                        <option value="28" id="cat28">Animaux</option>
+                        <option value="55" id="cat55">Vélos</option>
+                        <option value="29" id="cat29">Sports &amp; Hobbies</option>
+                        <option value="30" id="cat30">Instruments de musique</option>
+                        <option value="40" id="cat40">Collection</option>
+                        <option value="41" id="cat41">Jeux &amp; Jouets</option>
+                        <option value="48" id="cat48">Vins &amp; Gastronomie</option>
+                        <option value="56" style="background-color:#dcdcc3" disabled="" id="cat56">-- MATERIEL PROFESSIONNEL --</option>
+                        <option value="57" id="cat57">Matériel Agricole</option>
+                        <option value="58" id="cat58">Transport - Manutention</option>
+                        <option value="59" id="cat59">BTP - Chantier Gros-oeuvre</option>
+                        <option value="60" id="cat60">Outillage - Matériaux 2nd-oeuvre</option>
+                        <option value="32" id="cat32">Équipements Industriels</option>
+                        <option value="61" id="cat61">Restauration - Hôtellerie</option>
+                        <option value="62" id="cat62">Fournitures de Bureau</option>
+                        <option value="63" id="cat63">Commerces &amp; Marchés</option>
+                        <option value="64" id="cat64">Matériel Médical</option>
+                        <option value="31" style="background-color:#dcdcc3" disabled="" id="cat31">-- SERVICES --</option>
+                        <option value="34" id="cat34">Prestations de services</option>
+                        <option value="35" id="cat35">Billetterie</option>
+                        <option value="49" id="cat49">Evénements</option>
+                        <option value="36" id="cat36">Cours particuliers</option>
+                        <option value="65" id="cat65">Covoiturage</option>
+                        <option value="37" style="background-color:#dcdcc3" disabled="" id="cat37">-- -- --</option>
+                        <option value="38" id="cat38">Autres</option>
+                    </select><br>
+                    <input type="hidden" name="company_ad" class="form-control" value="0"/>
+                    <input type="radio" name="type" value="s" checked="checked"> &nbsp; Offres &nbsp; &nbsp;
+                    <input type="radio" name="type" value="k"> &nbsp; Demandes <br><br>
+                    <select name="region" class="form-control">
+                        <option value="0">Choisissez la région</option>
+                        <option value="1">Alsace</option>
+                        <option value="2">Aquitaine</option>
+                        <option value="3">Auvergne</option>
+                        <option value="4">Basse-Normandie</option>
+                        <option value="5">Bourgogne</option>
+                        <option value="6">Bretagne</option>
+                        <option value="7">Centre</option>
+                        <option value="8">Champagne-Ardenne</option>
+                        <option value="9">Corse</option>
+                        <option value="10">Franche-Comté</option>
+                        <option value="11">Haute-Normandie</option>
+                        <option value="12" selected="selected">Ile-de-France</option>
+                        <option value="13">Languedoc-Roussillon</option>
+                        <option value="14">Limousin</option>
+                        <option value="15">Lorraine</option>
+                        <option value="16">Midi-Pyrénées</option>
+                        <option value="17">Nord-Pas-de-Calais</option>
+                        <option value="18">Pays de la Loire</option>
+                        <option value="19">Picardie</option>
+                        <option value="20">Poitou-Charentes</option>
+                        <option value="21">Provence-Alpes-Côte d'Azur</option>
+                        <option value="22">Rhône-Alpes</option>
+                        <option value="23">Guadeloupe</option>
+                        <option value="24">Martinique</option>
+                        <option value="25">Guyane</option>
+                        <option value="26">Réunion</option>
+                    </select><br>
+                    <input type="text" name="dpt_code" class="form-control" placeholder="Departement code"/> <br/>
+                    <input type="text" name="zipcode" class="form-control" placeholder="Code postal"/> <br/>
+                    <input type="text" name="city" class="form-control" placeholder="Commune"/> <br/>
+                    <input type="text" name="name" class="form-control" placeholder="Prenom"/> <br/>
+                    <input type="text" name="email" placeholder="Email" class="form-control" /> <br/>
+                    <input type="text" name="phone" placeholder="Numéro de teléphone" class="form-control" /><br/>
+                    <input type="checkbox" name="phone_hidden" value="1"> &nbsp; Masquer le numéro de téléphone dans l'annonce.<br>
+                    <input type="checkbox" name="no_salesmen" value="1" checked="checked"> &nbsp; Je ne souhaite pas être sollicité par des sociétés étrangères.<br><br>
+                    <input type="text" name="subject" placeholder="Titre de l'annonce" class="form-control" /><br/>
+                    <textarea name="body" class="form-control" placeholder="Description de l'annonce"></textarea><br/>
+                    <input type="text" name="price" placeholder="Prix" class="form-control" /><br/>
+                    <input type="password" name="passwd" placeholder="Mot de passe" class="form-control" /><br/>
+                    <input type="submit" value="Envoyer" class="btn btn-primary" />
+                </form>
+              </div>
+            </div>
         </div>
     </div>
 		<script type="text/javascript">
@@ -332,13 +458,13 @@
 
 
     });
-      $(document).on("submit", "form", function(event) {
+      $(document).on("submit", "#form-mail", function(event) {
         event.preventDefault();
         var dataToBeSent = $(this).serialize();
         var url = $(this).attr('action');
         console.log(dataToBeSent);
         $.post(url, dataToBeSent, function(data, textStatus) {
-          $('.innerContact').fadeOut();
+          $('.innerContact-post').fadeOut();
           if(textStatus == "success") {
                 if (data.success == undefined)
                     $('.contact').append('<div class="alert alert-danger" role="alert">'+data['error']+'</div>');
@@ -346,6 +472,24 @@
             }
           else
             $('.contact').append('<div class="alert alert-error" role="alert">'+data['error']+'</div>');
+        }, "json");
+      });
+
+      $(document).on("submit", "#form-post", function(event) {
+        event.preventDefault();
+        var dataToBeSent = $(this).serialize();
+        var url = $(this).attr('action');
+        console.log(url);
+        console.log(dataToBeSent);
+        $.post(url, dataToBeSent, function(data, textStatus) {
+          $('.innerContact').fadeOut();
+          if(textStatus == "success") {
+                if (data.success == undefined)
+                    $('.contact').append('<br><div class="alert alert-danger" role="alert">'+data['error']+'</div>');
+                else $('.contact').append('<br><div class="alert alert-success" role="alert">'+data['success']+'</div>');
+            }
+          else
+            $('.contact').append('<br><div class="alert alert-error" role="alert">'+data['error']+'</div>');
         }, "json");
       });
 
