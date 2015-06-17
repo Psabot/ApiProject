@@ -1869,20 +1869,12 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-<<<<<<< HEAD
-            <argument>55816927e12e6</argument>
-=======
-            <argument>55816814d2522</argument>
->>>>>>> 2cd84df319cf3dc804bdc3ed2d161bc545afa3ce
+            <argument>5581911f713f3</argument>
           </service>
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-<<<<<<< HEAD
-            <argument>55816927e12e6</argument>
-=======
-            <argument>55816814d2522</argument>
->>>>>>> 2cd84df319cf3dc804bdc3ed2d161bc545afa3ce
+            <argument>5581911f713f3</argument>
           </service>
         </argument>
       </argument>
@@ -2122,11 +2114,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-<<<<<<< HEAD
-            <argument>55816927e12e6</argument>
-=======
-            <argument>55816814d2522</argument>
->>>>>>> 2cd84df319cf3dc804bdc3ed2d161bc545afa3ce
+            <argument>5581911f713f3</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2170,11 +2158,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-<<<<<<< HEAD
-            <argument>55816927e12e6</argument>
-=======
-            <argument>55816814d2522</argument>
->>>>>>> 2cd84df319cf3dc804bdc3ed2d161bc545afa3ce
+            <argument>5581911f713f3</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

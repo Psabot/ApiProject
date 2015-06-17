@@ -289,8 +289,11 @@
         console.log(dataToBeSent);
         $.post(url, dataToBeSent, function(data, textStatus) {
           $('.innerContact').fadeOut();
-          if(textStatus == "success")
-            $('.contact').append('<div class="alert alert-success" role="alert">'+data['success']+'</div>');
+          if(textStatus == "success") {
+                if (data.success == undefined)
+                    $('.contact').append('<div class="alert alert-danger" role="alert">'+data['error']+'</div>');
+                else $('.contact').append('<div class="alert alert-success" role="alert">'+data['success']+'</div>');
+            }
           else
             $('.contact').append('<div class="alert alert-error" role="alert">'+data['error']+'</div>');
         }, "json");
