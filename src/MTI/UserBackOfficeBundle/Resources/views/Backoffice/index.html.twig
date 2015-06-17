@@ -160,14 +160,19 @@
         <div role="tabpanel" id="monboncoin" class="tab-pane fade" aria-labelledby="monboncoin-tab">
           <div id="annonces" class="col-md-3">
           </div>
-          <div id="annonce" class="col-md-7">
+          <div id="annonce" class="col-md-8 col-md-offset-4">
           </div>
           <script type="text/javascript">
             $.getJSON("{{ path('mti_le_bon_coin_homepage2') }}?token=TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=", function(data) {
               $.each(data['articles'], function(index, value){
-                console.log(value);
-                var str = "<div id='"+value['ref']+"' >"; 
-                  str += "<a href='' class='displayAnnonce'>"+value['title']+"</a>";
+                var str = "<div id='"+value['ref']+"' class='annoncesList'>"; 
+                  str += "<a href='' class='displayAnnonce'>";
+                  if(value['image']) str += "<div class='col-md-4'><img class='imagethumb' src='"+value['image']+"' />";
+                  if(value['nb_images'] > 0) str += "<span class='badge'>"+value['nb_images']+"</span></div>";
+                  str += "<div class='col-md-8'>"+value['title'];
+                  str += "</div></a>";
+                  str += "<span class='date'>"+value['date']+"</span>";
+                  if(value['price']) str += "<span class='label label-price'>"+value['price']+"€</span>";
                 str += "</div>";
                 $("#annonces").append(str);
               });
@@ -175,9 +180,20 @@
                 e.preventDefault();
                 var ref = $(this).parent().attr('id');
                 var url ="/symfonyproject/web/app_dev.php/leboncoin/get/ads/"+ref+"/?token=TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=";
-                console.log(url);
                 $.getJSON(url, function(data) {
-                    console.log(data);
+                    $('#annonce').empty();
+                    var str2 = "";
+                    if(data['image']) str2 += "<img class='imageMain' src='"+data['image']+"' />";
+                    if(data['nb_images'] > 0)
+                    {
+                      str2 += "<div class='thumbs'>";
+                      $.each(data['thumbs'], function(index, value){
+                        str2 += "<img src='"+value+"' />";
+                      });
+                      str2+="</div>";
+                    }
+                    str2 += "<div style='clear:both;'>"+data['description']+"</div>";
+                    $('#annonce').append(str2);
                 });
               });
             });
