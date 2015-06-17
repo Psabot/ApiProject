@@ -18,6 +18,10 @@ MTI\UserBackOfficeBundle\Entity\Call:
             type: string
             length: 100
             nullable: TRUE
+        category:
+            type: integer
+            length: 11
+            nullable: TRUE
 
     lifecycleCallbacks:
         prePersist: [setCreatedValue]
