@@ -108,13 +108,21 @@ class BackofficeController extends Controller
 	    return new Response('username  : '.$username);
 	}
 
-	public function updateAction()
+	public function updateAction(Request $request)
 	{
-		$request = Request::createFromGlobals();
 		$offer = $request->request->get('offer', 1);
+		$user = $this->getUser();
+
+		// Pour la test suite
+		$idUser = $request->request->get('idUser', -1);
+		if ($idUser > 0)
+		{
+			$user = $this->getDoctrine()
+	        ->getRepository('MTIUserBackOfficeBundle:Profile')
+	        ->find($idUser);
+		}
 
 		$em = $this->getDoctrine()->getManager();
-    	$user = $this->getUser();
 
     	$user->setSubscribe($offer);
     	$em->flush();
@@ -147,11 +155,14 @@ class BackofficeController extends Controller
 		return $response;
 	}
 
-	public function addCallAction()
+	public function addCallAction(Request $request)
 	{
 		$call = new Call();
 
-		$user = $this->getUser();
+		$idUser = $request->request->get('idUser', -1);
+		$user = $this->getDoctrine()
+	        ->getRepository('MTIUserBackOfficeBundle:Profile')
+	        ->find($idUser);
 
 		$call->setUserId($user->getId());
 		$call->setType(2);

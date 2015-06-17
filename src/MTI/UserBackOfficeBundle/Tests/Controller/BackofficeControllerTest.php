@@ -27,6 +27,7 @@ class BackofficeControllerTest extends WebTestCase
 
     public function testCreate()
     {
+
     	$client = static::createClient();
     	$client->request(
     		'POST', 
@@ -54,5 +55,64 @@ class BackofficeControllerTest extends WebTestCase
 		    $profile = $profiles[0];
 
 		$this->assertEquals('test', $profile->getUsername());
+    }
+     
+    public function testUpdate()
+    {
+    	$client = static::createClient();
+    	$client->request(
+    		'POST', 
+    		'/update', 
+    		array('offer' => 3,'idUser' => 10)
+    	);
+
+    	$client->insulate();
+
+    	$user = $this->em
+	        ->getRepository('MTIUserBackOfficeBundle:Profile')
+	        ->find(10);
+
+	    $this->assertEquals(3, $user->getSubscribe());
+    }
+
+    public function testJson()
+    {
+    	$client = static::createClient();
+
+        $crawler = $client->request('GET', '/testjson');
+
+    	$this->assertTrue($client->getResponse()->headers->contains('Content-Type', 'application/json'));
+    }
+
+    public function testAddCall()
+    {
+    	$query2 = $this->em->createQuery(
+		    'SELECT count(call)
+		    FROM MTIUserBackOfficeBundle:Call call
+		    WHERE call.userid = :user'
+		)->setParameter('user', 10);
+
+	    $oldcount = $query2->getSingleResult();
+
+    	$client = static::createClient();
+    	$client->request(
+    		'POST', 
+    		'/addcall', 
+    		array('idUser' => 10)
+    	);
+
+    	$client->insulate();
+
+    	$query3 = $this->em->createQuery(
+		    'SELECT count(call)
+		    FROM MTIUserBackOfficeBundle:Call call
+		    WHERE call.userid = :user'
+		)->setParameter('user', 10);
+
+	    $count = $query3->getSingleResult();
+
+	    $oldcount++;
+
+	    $this->assertEquals($oldcount, $count);
     }
 }

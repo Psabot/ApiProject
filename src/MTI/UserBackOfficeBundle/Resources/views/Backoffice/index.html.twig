@@ -41,6 +41,11 @@
                 <i class="fa fa-user"><span>Profil</span></i>
               </a>
             </li>
+            <li role="presentation">
+              <a href="#monboncoin" id="monboncoin-tab" role="tab" data-toggle="tab" aria-controls="monboncoin">
+                <i class="fa fa-cube"><span>MonBonCoin</span></i>
+              </a>
+            </li>
           </ul>
         </div>
         <div id="bo-content" class="tab-content">
@@ -152,6 +157,25 @@
             </div>
         </div>
         </div>
+        <div role="tabpanel" id="monboncoin" class="tab-pane fade" aria-labelledby="monboncoin-tab">
+          <script type="text/javascript">
+            $.getJSON("{{ path('mti_le_bon_coin_homepage2') }}?token=TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=", function(data) {
+              console.log(data);
+            });
+            /*$.ajax({
+              url: "http://fiddle.jshell.net/favicon.png",
+              beforeSend: function( xhr ) {
+                xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+              }
+            })
+              .done(function( data ) {
+                if ( console && console.log ) {
+                  console.log( "Sample of data:", data.slice( 0, 100 ) );
+                }
+              });*/
+          </script>
+        </div>
+    </div>
 		<script type="text/javascript">
 
     $('#sidebar a').click(function (e) {
