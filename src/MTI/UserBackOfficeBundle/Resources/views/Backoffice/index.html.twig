@@ -108,20 +108,20 @@
                 </div>
                 <div class="panel-body">
                   <div class="form-group group-clear">
-                    <label class="col-sm-3 control-label">Prénom:</label>
-                    <div class="col-sm-8">{{app.user.username}}</div>
+                    <label class="col-sm-4 control-label">Prénom:</label>
+                    <div class="col-sm-7">{{app.user.username}}</div>
                   </div>
                   <div class="form-group group-clear">
-                    <label class="col-sm-3 control-label">Nom:</label>
-                    <div class="col-sm-8">{{app.user.lastname}}</div>
+                    <label class="col-sm-4 control-label">Nom:</label>
+                    <div class="col-sm-7">{{app.user.lastname}}</div>
                   </div>
                   <div class="form-group group-clear">
-                    <label class="col-sm-3 control-label">Email:</label>
-                    <div class="col-sm-8">{{app.user.email}}</div>
+                    <label class="col-sm-4 control-label">Email:</label>
+                    <div class="col-sm-7">{{app.user.email}}</div>
                   </div>
                   <div class="form-group group-clear">
-                    <label class="col-sm-3 control-label">Forfait:</label>
-                    <div class="col-sm-8">
+                    <label class="col-sm-4 control-label">Forfait:</label>
+                    <div class="col-sm-7">
                       {% if app.user.subscribe == 1 %}
                         Basique
                       {% endif %}
@@ -133,6 +133,20 @@
                       {% endif %}
                     </div>
                   </div>
+                  <div class="form-group group-clear">
+                    <label class="col-sm-4 control-label">Consommation:</label>
+                    <div class="col-sm-7">
+                      {% if app.user.subscribe == 1 %}
+                        {{ countcall[1] }} / 50
+                      {% endif %}
+                      {% if app.user.subscribe == 2 %}
+                        {{ countcall[1] }} / 200
+                      {% endif %}
+                      {% if app.user.subscribe == 3 %}
+                        {{ countcall[1] }} / 500
+                      {% endif %}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -141,8 +155,8 @@
                 <div class="pricing-item {% if app.user.subscribe == 1 %} current_offer {% endif %} col-md-3 col-md-offset-1">
                     <h3>Basique</h3>
                     <ul>
-                        <li>osef1</li>
-                        <li>osef2</li>
+                        <li>50 <br/>appels</li>
+                        <li>-----</li>
                     </ul>
                     <form action="{{ path('mti_user_back_office_update') }}" method="post">
                       <input type="hidden" value="1" name="offer" />
@@ -154,8 +168,8 @@
                 <div class="pricing-item {% if app.user.subscribe == 2 %} current_offer {% endif %} col-md-3 col-md-offset-1">
                     <h3>pro</h3>
                     <ul>
-                        <li>osef1</li>
-                        <li>osef2</li>
+                        <li>200 appels</li>
+                        <li>Showcase</li>
                     </ul>
                     <form action="{{ path('mti_user_back_office_update') }}" method="post">
                       <input type="hidden" value="2" name="offer" />
@@ -167,8 +181,8 @@
                 <div class="pricing-item {% if app.user.subscribe == 3 %} current_offer {% endif %} col-md-3 col-md-offset-1">
                     <h3>premium</h3>
                     <ul>
-                        <li>osef1</li>
-                        <li>osef2</li>
+                        <li>500 appels</li>
+                        <li>Showcase</li>
                     </ul>
                     <form action="{{ path('mti_user_back_office_update') }}" method="post">
                       <input type="hidden" value="3" name="offer" />
