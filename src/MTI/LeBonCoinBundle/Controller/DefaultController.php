@@ -41,6 +41,8 @@ class DefaultController extends Controller
         $towns_url = $request->query->get('towns');
         $type_url = $request->query->get('type');
         $query_url = $request->query->get('query');
+        $pmin_url = $request->query->get('pmin');
+        $pmax_url = $request->query->get('pmax');
         if ($type_url != null && $type_url == 'ind') $type_url = 'p';
         else if ($type_url != null && $type_url == 'pro') $type_url = 'c';
         else $type_url = 'a';
@@ -50,6 +52,8 @@ class DefaultController extends Controller
         if ($sort_url != null) $request_url .= "&sp=".$sort_url;
         if ($type_url != null) $request_url .= "&f=".$type_url;
         if ($query_url != null) $request_url .= "&q=".$query_url;
+        if ($pmin_url != null) $request_url .= "&ps=".$pmin_url;
+        if ($pmax_url != null) $request_url .= "&pe=".$pmax_url;
         //echo $request_url;
 
         $html = file_get_html($request_url);
@@ -207,6 +211,8 @@ class DefaultController extends Controller
         $towns_url = $request->query->get('towns');
         $type_url = $request->query->get('type');
         $query_url = $request->query->get('query');
+        $pmin_url = $request->query->get('pmin');
+        $pmax_url = $request->query->get('pmax');
         if ($type_url != null && $type_url == 'ind') $type_url = 'p';
         else if ($type_url != null && $type_url == 'pro') $type_url = 'c';
         else $type_url = 'a';
@@ -216,6 +222,8 @@ class DefaultController extends Controller
         if ($sort_url != null) $request_url .= "&sp=".$sort_url;
         if ($type_url != null) $request_url .= "&f=".$type_url;
         if ($query_url != null) $request_url .= "&q=".$query_url;
+        if ($pmin_url != null) $request_url .= "&ps=".$pmin_url;
+        if ($pmax_url != null) $request_url .= "&pe=".$pmax_url;
         //echo $request_url;
         $html = file_get_html($request_url);
 
