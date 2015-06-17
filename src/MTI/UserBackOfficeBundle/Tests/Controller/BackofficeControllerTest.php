@@ -111,8 +111,15 @@ class BackofficeControllerTest extends WebTestCase
 
 	    $count = $query3->getSingleResult();
 
-	    $oldcount++;
-
 	    $this->assertEquals($oldcount, $count);
+    }
+
+    public function testGetAnnonce()
+    {
+    	$client = static::createClient();
+
+        $crawler = $client->request('GET', '/leboncoin/get/ads/820098496/?token=TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=');
+
+    	$this->assertTrue($client->getResponse()->headers->contains('Content-Type', 'application/json'));
     }
 }
