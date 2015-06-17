@@ -442,7 +442,7 @@ class DefaultController extends Controller
             'region' => utf8_encode($html->find('span[class=fine_print]', 0)->find('a', 1)->plaintext),
             'town' => utf8_encode($html->find('td[itemprop=addressLocality]', 0)->plaintext),
             'postal' => $html->find('td[itemprop=postalCode]', 0)->plaintext,
-            'category' => $html->find('span[class=fine_print]', 0)->find('a', 2)->plaintext,
+            'category' => utf8_encode($html->find('span[class=fine_print]', 0)->find('a', 2)->plaintext),
             'title' => utf8_encode($html->find('h1[id=ad_subject]', 0)->plaintext),
             'price' => $price,
             'description' => utf8_encode($html->find('div[itemprop=description]', 0)->plaintext),
