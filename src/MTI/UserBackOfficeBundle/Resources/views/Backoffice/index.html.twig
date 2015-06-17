@@ -83,7 +83,7 @@
             <div class="col-sm-5" id="dashboard-categories" style="margin-top: 25px; margin-bottom: 50px">
                 <div style="padding: 0 10px 5% 10px; background-color: white">
               <div class="chartcontainer"> 
-                <h3 style="margin-bottom:27px;">Top 6 categories</h3>
+                <h3 style="margin-bottom:27px;">Top 10 categories</h3>
                 <canvas id="myChart3"></canvas>
               </div>
                 </div>
@@ -366,15 +366,16 @@
 			gauge.animationSpeed = 10; // set animation speed (32 is default value)
 			gauge.set({{ countcall[1] }}); // set actual value
 
-      var colors = ["#F7464A", "#FDB45C", "#46BFBD"];
+      var colors = ["#D95B43", "#C02942", "#ECD078", "#542437", "#53777A", "#CFF09E", "#79BD9A", "#335533", "#0B486B", "#FF6B6B"];
 
       var request_types = ['offres', 'offres part', 'offres pro', 'demandes', 'demandes part', 'demandes pro', 'annonce', 'mail', 'post'];
 
+      var colors_counter = 0;
       var data = [
           {% for key in calltype %}
             {
-              value: {{ key[1] }},
-              color: colors[Math.floor(Math.random()*colors.length)],
+              value: {{ key['calls'] }},
+              color: colors[colors_counter++],
               label: request_types[{{ key['type'] }}]
             },
           {% endfor %}
@@ -387,7 +388,7 @@
     var data2 = {
     labels: [
           {% for key,value in datecount %}
-                        "{{ key }}",
+                "{{ key }}",
           {% endfor %}
     ],
     datasets: [
