@@ -144,6 +144,10 @@
   padding: 25px 0px;
 }
 
+#pricing ul li:last-child {
+  border-bottom: none;
+}
+
 .pricing-item
 {
   background-color: #fff;
@@ -201,4 +205,20 @@
   color: #FFFFFF;
   text-align: center; 
   font-size: 16px;
+}
+
+#showcase
+{
+  height: 417px;
+  background: bottom no-repeat fixed url('../img/dashboard.jpg');
+}
+
+#dashboard
+{
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  text-align: center;
+  padding-top: 150px;
+  font-size: 32px;
 }
