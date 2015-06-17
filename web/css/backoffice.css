@@ -1,3 +1,7 @@
+html{
+    height: 100%;
+  }
+
 body
 {
 	background-color: #f1f2f7;
@@ -215,4 +219,60 @@ body
 .current_offer
 {
 	opacity: 0.5;
+}
+
+.annoncesList div:first
+{
+  border-top: 1px solid #ddd;
+}
+
+.annoncesList
+{
+  border-bottom: 1px solid #ddd;
+  padding: 30px 0px;
+  position: relative;
+}
+
+#annonces
+{
+  height: 100%;
+  overflow: scroll;
+  position: fixed;
+}
+
+.imageMain, .thumbs
+{
+  margin: auto;
+  display: block;
+  text-align: center;
+}
+
+.displayAnnonce
+{
+  display: block;
+  overflow: hidden;
+}
+
+.imagethumb
+{
+  width: 100%;
+}
+
+.label-price
+{
+  background: #fca932;
+  font-weight: bold;
+  position: absolute;
+  right: 0px;
+  bottom: 15px;
+}
+
+.date
+{
+  position: absolute;
+  right: 50px;
+  bottom: 12px;
+  font-size: 11px;
+  font-style: italic;
+  opacity: 0.6;
 }
