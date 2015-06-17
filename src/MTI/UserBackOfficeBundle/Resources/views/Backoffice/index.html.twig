@@ -80,17 +80,17 @@
             </div>
             </div>
             <div class="row">
-            <div class="col-sm-5"  style="margin-top: 25px; margin-bottom: 50px">
+            <div class="col-sm-5" id="dashboard-categories" style="margin-top: 25px; margin-bottom: 50px">
                 <div style="padding: 0 10px 5% 10px; background-color: white">
               <div class="chartcontainer"> 
-                <h3 style="margin-bottom:27px;">Top 6 categories</h3>
+                <h3 style="margin-bottom:27px;">Top 10 categories</h3>
                 <canvas id="myChart3"></canvas>
               </div>
                 </div>
             </div>
             <div class="col-sm-7" style="margin-top: 25px; margin-bottom: 50px">
                 <div style="padding: 0; margin: 0; background-color: white; overflow: hidden">
-                  <div id="regions_div" style="height: 50%; float: right; margin-top: -5px"></div>
+                  <div id="regions_div" style="float: right; margin-top: -5px"></div>
                 </div>
             </div>
             </div>
@@ -303,6 +303,36 @@
 
         var categories_match = ["All", "Offres emploie", "Voitures", "Motos", "Caravaning", "Utilitaires", "Equipement auto", "Equipement moto", "Equipement caravaning", "Nautisme", "Equipement nautisme", "Ventes immobilieres", "Locations", "Colocations", "Bureaux commerces", "Locations gites", "Chambres hotes", "Campings", "Hotels", "Hebergements insolites", "Informatique", "Consoles jeux video", "Image son", "Telephonie", "Ameublement", "Electromenager", "Arts de la table", "Decoration", "Linge de maison", "Bricolage", "Jardinage", "Vetements", "Chaussures", "Accessoires bagagerie", "Montres bijoux", "Equipement bebe", "Dvd films", "Cd musique", "Livres", "Animaux", "Velos", "Sports hobbies", "Instruments de musique", "Collection", "Jeux jouets", "Vins gastronomie", "Materiel agricole", "Transport manutention", "Chantier gros oeuvre", "Outillage materiaux", "Equipements industriels", "Restauration hotellerie", "Fournitures de bureau", "Commerces marches", "Materiel medical", "Prestations de services", "Billetterie", "Evenements", "Cours particuliers", "Covoiturage", "Autres"];
 
+        
+        var data3 = {
+            labels: [
+                  {% for key in callcategory %}
+                        categories_match[{{ key['category'] }}],
+                  {% endfor %}
+            ],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(151,187,205,0.5)",
+                    strokeColor: "rgba(151,187,205,0.8)",
+                    highlightFill: "rgba(151,187,205,0.75)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: [
+                    {% for key in callcategory %}
+                                {{ key['calls'] }},
+                    {% endfor %}
+                    ]
+                }
+            ]
+        };
+        var ctx3 = document.getElementById("myChart3").getContext("2d");
+        var myBarChart = new Chart(ctx3).Bar(data3);
+
+        $(window).on('resize', function(){
+            $('#regions_div').height($('#dashboard-categories').innerHeight() + 4);
+        });
+        $('#regions_div').height($('#dashboard-categories').innerHeight() + 4);
+
         google.setOnLoadCallback(drawRegionsMap);
 
       function drawRegionsMap() {
@@ -325,6 +355,9 @@
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
+        /*$(window).on('resize', function(){
+            chart.draw(data, options);
+        });*/
         chart.draw(data, options);
       }
 
@@ -342,7 +375,8 @@
               $('#bo-content').animate({
                 'margin-left':'0px', queue:false}, function(){console.log("ok");$('#sidebar').hide();}
               );
-              setTimeout(function(){ window.dispatchEvent(new Event('resize'));}, 400);
+              setTimeout(function(){ window.dispatchEvent(new Event('resize'));}, 350);
+              setTimeout(function(){ $('#regions_div').height($('#dashboard-categories').innerHeight() + 4);}, 500);
             } else {
                 $('#sidebar').show();
                 $('#sidebar').animate({
@@ -351,7 +385,8 @@
                 $('#bo-content').animate({
                   'margin-left': '240px'
                 },{queue:false});
-                setTimeout(function(){ window.dispatchEvent(new Event('resize'));}, 400);
+                setTimeout(function(){ window.dispatchEvent(new Event('resize'));}, 350);
+                setTimeout(function(){ $('#regions_div').height($('#dashboard-categories').innerHeight() + 4);}, 500);
             }
         });
 
@@ -382,15 +417,16 @@
 			gauge.animationSpeed = 10; // set animation speed (32 is default value)
 			gauge.set({{ countcall[1] }}); // set actual value
 
-      var colors = ["#F7464A", "#FDB45C", "#46BFBD"];
+      var colors = ["#D95B43", "#C02942", "#ECD078", "#542437", "#53777A", "#CFF09E", "#79BD9A", "#335533", "#0B486B", "#FF6B6B"];
 
       var request_types = ['offres', 'offres part', 'offres pro', 'demandes', 'demandes part', 'demandes pro', 'annonce', 'mail', 'post'];
 
+      var colors_counter = 0;
       var data = [
           {% for key in calltype %}
             {
-              value: {{ key[1] }},
-              color: colors[Math.floor(Math.random()*colors.length)],
+              value: {{ key['calls'] }},
+              color: colors[colors_counter++],
               label: request_types[{{ key['type'] }}]
             },
           {% endfor %}
@@ -403,7 +439,7 @@
     var data2 = {
     labels: [
           {% for key,value in datecount %}
-                        "{{ key }}",
+                "{{ key }}",
           {% endfor %}
     ],
     datasets: [
@@ -426,29 +462,6 @@
  var ctx2 = document.getElementById("myChart2").getContext("2d");
     var myLineChart = new Chart(ctx2).Line(data2);
 
-    var data3 = {
-    labels: [
-          {% for key in callcategory %}
-                categories_match[{{ key['category'] }}],
-          {% endfor %}
-    ],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,0.8)",
-            highlightFill: "rgba(151,187,205,0.75)",
-            highlightStroke: "rgba(151,187,205,1)",
-            data: [
-            {% for key in callcategory %}
-                        {{ key['calls'] }},
-            {% endfor %}
-            ]
-        }
-    ]
-};
- var ctx3 = document.getElementById("myChart3").getContext("2d");
-    var myBarChart = new Chart(ctx3).Bar(data3);
 		</script>
 	</body>
 </html>

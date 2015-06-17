@@ -36,10 +36,11 @@ class BackofficeController extends Controller
 
 		// Calls type
 		$callTypesQuery = $em->createQuery(
-		    'SELECT call.type, count(call)
+		    'SELECT call.type, count(call) as calls
 		    FROM MTIUserBackOfficeBundle:Call call
 		    WHERE call.userid = :user
-		    GROUP BY call.type'
+		    GROUP BY call.type
+		    ORDER BY calls DESC'
 		)->setParameter('user', $user->getId());
 
 		$callTypes = $callTypesQuery->getResult();
