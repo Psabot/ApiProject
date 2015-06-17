@@ -562,22 +562,34 @@ class DefaultController extends Controller
             return $response;
         }
 
-        /*$name_post = $request->request->get('name');
+        $category_post = $request->request->get('category');
+        $company_ad_post = $request->request->get('company_ad');
+        $type_post = $request->request->get('type');
+        $region_post = $request->request->get('region');
+        $dpt_code_post = $request->request->get('dpt_code');
+        $zipcode_post = $request->request->get('zipcode');
+        $city_post = $request->request->get('city');
+        $name_post = $request->request->get('name');
         $email_post = $request->request->get('email');
         $phone_post = $request->request->get('phone');
+        $phone_hidden_post = $request->request->get('phone_hidden');
+        $no_salesmen_post = $request->request->get('no_salesmen');
+        $subject_post = $request->request->get('subject');
         $body_post = $request->request->get('body');
+        $price_post = $request->request->get('price');
+        $passwd_post = $request->request->get('passwd');
 
-        if ($name_post == null || $email_post == null || $body_post == null) {
+        if ($passwd_post == null || $category_post == null || $company_ad_post == null || $type_post == null || $region_post == null || $dpt_code_post == null || $zipcode_post == null || $city_post == null || $name_post == null || $email_post == null || $phone_post == null || $phone_hidden_post == null || $no_salesmen_post == null || $subject_post == null || $body_post == null) {
             $response = new Response();
-            $response->setContent(json_encode(array('error' => 'Please provide all required options to send the mail to the announcer')));
+            $response->setContent(json_encode(array('error' => 'Please provide all required options to publish a new ad')));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
-        }*/
+        }
 
         //set POST variables
         $url = 'http://www2.leboncoin.fr/ai/verify/1';
         $fields = array(
-            /*'category' => urlencode($category_post),
+            'category' => urlencode($category_post),
             'company_ad' => urlencode($company_ad_post),
             'type' => urlencode($type_post),
             'region' => urlencode($region_post),
@@ -591,8 +603,8 @@ class DefaultController extends Controller
             'no_salesmen' => urlencode($no_salesmen_post),
             'subject' => urlencode($subject_post),
             'body' => urlencode($body_post),
-            'price' => urlencode($price_post),*/
-            'category' => urlencode('38'),
+            'price' => ($price_post == null) ? null : urlencode($price_post),
+            /*'category' => urlencode('38'),
             'company_ad' => urlencode('0'),
             'type' => urlencode('s'),
             'region' => urlencode('12'),
@@ -606,7 +618,7 @@ class DefaultController extends Controller
             'no_salesmen' => urlencode('1'),
             'subject' => urlencode('Un objet test'),
             'body' => urlencode('un super objet trop beau qui va faire fureur'),
-            'price' => urlencode('10'),
+            'price' => urlencode('10'),*/
 
             /*'check_type_diff' => '0',
             'address' => null,
@@ -843,26 +855,11 @@ class DefaultController extends Controller
 
         $url = 'http://www2.leboncoin.fr/ai/create/1';
         $fields = array(
-            /*'category' => urlencode($category_post),
-            'company_ad' => urlencode($company_ad_post),
-            'type' => urlencode($type_post),
-            'region' => urlencode($region_post),
-            'dpt_code' => urlencode($dpt_code_post),
-            'zipcode' => urlencode($zipcode_post),
-            'city' => urlencode($city_post),
-            'name' => urlencode($name_post),
-            'email' => urlencode($email_post),
-            'phone' => urlencode($phone_post),
-            'phone_hidden' => urlencode($phone_hidden_post),
-            'no_salesmen' => urlencode($no_salesmen_post),
-            'subject' => urlencode($subject_post),
-            'body' => urlencode($body_post),
-            'price' => urlencode($price_post),*/
             'ca' => urlencode('12_s'),
-            'category' => urlencode('38'),
-            'city' => urlencode('Puteaux'),
-            'passwd' => urlencode('12345'),
-            'passwd_ver' => urlencode('12345'),
+            'category' => urlencode($category_post),
+            'city' => urlencode($city_post),
+            'passwd' => urlencode($passwd_post),
+            'passwd_ver' => urlencode($passwd_post),
             'create' => urlencode('Valider'),
             'create2' => urlencode('Valider'),
         );
