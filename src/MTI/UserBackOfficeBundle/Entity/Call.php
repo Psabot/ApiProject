@@ -16,6 +16,8 @@ class Call
      */
     private $type;
 
+    protected $region = null;
+
 
     /**
      * Get id
@@ -76,6 +78,29 @@ class Call
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set region
+     *
+     * @param string $region
+     * @return Call
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return string 
+     */
+    public function getRegion()
+    {
+        return $this->region;
     }
 
     /**

@@ -5,8 +5,13 @@
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.debug">true</parameter>
     <parameter key="kernel.name">app</parameter>
+<<<<<<< HEAD
+    <parameter key="kernel.cache_dir">C:\wamp\www\ApiProject\app\cache\dev</parameter>
+    <parameter key="kernel.logs_dir">C:\wamp\www\ApiProject\app\logs</parameter>
+=======
     <parameter key="kernel.cache_dir">C:\wamp\www\SymfonyProject\app\cache\dev</parameter>
     <parameter key="kernel.logs_dir">C:\wamp\www\SymfonyProject\app\logs</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="SecurityBundle">Symfony\Bundle\SecurityBundle\SecurityBundle</parameter>
@@ -109,7 +114,11 @@
     <parameter key="session.storage.options" type="collection">
       <parameter key="gc_probability">1</parameter>
     </parameter>
+<<<<<<< HEAD
+    <parameter key="session.save_path">C:\wamp\www\ApiProject\app\cache\dev/sessions</parameter>
+=======
     <parameter key="session.save_path">C:\wamp\www\SymfonyProject\app\cache\dev/sessions</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="security.secure_random.class">Symfony\Component\Security\Core\Util\SecureRandom</parameter>
     <parameter key="form.resolved_type_factory.class">Symfony\Component\Form\ResolvedFormTypeFactory</parameter>
@@ -166,7 +175,11 @@
     <parameter key="data_collector.form.extractor.class">Symfony\Component\Form\Extension\DataCollector\FormDataExtractor</parameter>
     <parameter key="profiler_listener.only_exceptions">false</parameter>
     <parameter key="profiler_listener.only_master_requests">false</parameter>
+<<<<<<< HEAD
+    <parameter key="profiler.storage.dsn">file:C:\wamp\www\ApiProject\app\cache\dev/profiler</parameter>
+=======
     <parameter key="profiler.storage.dsn">file:C:\wamp\www\SymfonyProject\app\cache\dev/profiler</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="profiler.storage.username"></parameter>
     <parameter key="profiler.storage.password"></parameter>
     <parameter key="profiler.storage.lifetime">86400</parameter>
@@ -190,7 +203,11 @@
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
+<<<<<<< HEAD
+    <parameter key="router.resource">C:\wamp\www\ApiProject\app\cache\dev/assetic/routing.yml</parameter>
+=======
     <parameter key="router.resource">C:\wamp\www\SymfonyProject\app\cache\dev/assetic/routing.yml</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="router.cache_class_prefix">appDev</parameter>
     <parameter key="request_listener.http_port">80</parameter>
     <parameter key="request_listener.https_port">443</parameter>
@@ -205,7 +222,11 @@
     <parameter key="debug.stopwatch.class">Symfony\Component\Stopwatch\Stopwatch</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
     <parameter key="debug.event_dispatcher.class">Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher</parameter>
+<<<<<<< HEAD
+    <parameter key="debug.container.dump">C:\wamp\www\ApiProject\app\cache\dev/appDevDebugProjectContainer.xml</parameter>
+=======
     <parameter key="debug.container.dump">C:\wamp\www\SymfonyProject\app\cache\dev/appDevDebugProjectContainer.xml</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="debug.controller_resolver.class">Symfony\Component\HttpKernel\Controller\TraceableControllerResolver</parameter>
     <parameter key="security.context.class">Symfony\Component\Security\Core\SecurityContext</parameter>
     <parameter key="security.user_checker.class">Symfony\Component\Security\Core\User\UserChecker</parameter>
@@ -395,7 +416,11 @@
     <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">null</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.source_ip">null</parameter>
+<<<<<<< HEAD
+    <parameter key="swiftmailer.spool.default.memory.path">C:\wamp\www\ApiProject\app\cache\dev/swiftmailer/spool/default</parameter>
+=======
     <parameter key="swiftmailer.spool.default.memory.path">C:\wamp\www\SymfonyProject\app\cache\dev/swiftmailer/spool/default</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="swiftmailer.mailer.default.spool.enabled">true</parameter>
     <parameter key="swiftmailer.mailer.default.plugin.impersonate">null</parameter>
     <parameter key="swiftmailer.mailer.default.single_address">null</parameter>
@@ -420,7 +445,11 @@
     <parameter key="assetic.worker.cache_busting.class">Assetic\Factory\Worker\CacheBustingWorker</parameter>
     <parameter key="assetic.value_supplier.class">Symfony\Bundle\AsseticBundle\DefaultValueSupplier</parameter>
     <parameter key="assetic.node.paths" type="collection"/>
+<<<<<<< HEAD
+    <parameter key="assetic.cache_dir">C:\wamp\www\ApiProject\app\cache\dev/assetic</parameter>
+=======
     <parameter key="assetic.cache_dir">C:\wamp\www\SymfonyProject\app\cache\dev/assetic</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="assetic.bundles" type="collection"/>
     <parameter key="assetic.twig_extension.class">Symfony\Bundle\AsseticBundle\Twig\AsseticExtension</parameter>
     <parameter key="assetic.twig_formula_loader.class">Assetic\Extension\Twig\TwigFormulaLoader</parameter>
@@ -542,7 +571,11 @@
     <parameter key="doctrine.orm.second_level_cache.cache_configuration.class">Doctrine\ORM\Cache\CacheConfiguration</parameter>
     <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
+<<<<<<< HEAD
+    <parameter key="doctrine.orm.proxy_dir">C:\wamp\www\ApiProject\app\cache\dev/doctrine/orm/Proxies</parameter>
+=======
     <parameter key="doctrine.orm.proxy_dir">C:\wamp\www\SymfonyProject\app\cache\dev/doctrine/orm/Proxies</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
     <parameter key="sensio_framework_extra.view.guesser.class">Sensio\Bundle\FrameworkExtraBundle\Templating\TemplateGuesser</parameter>
     <parameter key="sensio_framework_extra.controller.listener.class">Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener</parameter>
@@ -572,7 +605,11 @@
     <parameter key="fos_rest.violation_formatter.class">FOS\RestBundle\Util\ViolationFormatter</parameter>
     <parameter key="fos_rest.request.param_fetcher.class">FOS\RestBundle\Request\ParamFetcher</parameter>
     <parameter key="fos_rest.request.param_fetcher.reader.class">FOS\RestBundle\Request\ParamReader</parameter>
+<<<<<<< HEAD
+    <parameter key="fos_rest.cache_dir">C:\wamp\www\ApiProject\app\cache\dev/fos_rest</parameter>
+=======
     <parameter key="fos_rest.cache_dir">C:\wamp\www\SymfonyProject\app\cache\dev/fos_rest</parameter>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     <parameter key="fos_rest.routing.loader.default_format">json</parameter>
     <parameter key="fos_rest.routing.loader.include_format">true</parameter>
     <parameter key="fos_rest.serializer.serialize_null">false</parameter>
@@ -911,7 +948,11 @@
         </argument>
       </argument>
       <argument type="collection">
+<<<<<<< HEAD
+        <argument key="cache_dir">C:\wamp\www\ApiProject\app\cache\dev/translations</argument>
+=======
         <argument key="cache_dir">C:\wamp\www\SymfonyProject\app\cache\dev/translations</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
         <argument key="debug">true</argument>
       </argument>
       <argument type="collection"/>
@@ -1125,7 +1166,11 @@
     </service>
     <service id="security.secure_random" class="Symfony\Component\Security\Core\Util\SecureRandom">
       <tag name="monolog.logger" channel="security"/>
+<<<<<<< HEAD
+      <argument>C:\wamp\www\ApiProject\app\cache\dev/secure_random.seed</argument>
+=======
       <argument>C:\wamp\www\SymfonyProject\app\cache\dev/secure_random.seed</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
       <argument type="service" id="monolog.logger.security" on-invalid="ignore"/>
     </service>
     <service id="form.resolved_type_factory" class="Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy">
@@ -1360,7 +1405,11 @@
     <service id="templating.filename_parser" class="Symfony\Bundle\FrameworkBundle\Templating\TemplateFilenameParser"/>
     <service id="templating.locator" class="Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator" public="false">
       <argument type="service" id="file_locator"/>
+<<<<<<< HEAD
+      <argument>C:\wamp\www\ApiProject\app\cache\dev</argument>
+=======
       <argument>C:\wamp\www\SymfonyProject\app\cache\dev</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     </service>
     <service id="templating.helper.assets" class="Symfony\Bundle\FrameworkBundle\Templating\Helper\AssetsHelper">
       <tag name="templating.helper" alias="assets"/>
@@ -1429,7 +1478,11 @@
       <tag name="monolog.logger" channel="profiler"/>
       <argument type="service">
         <service class="Symfony\Component\HttpKernel\Profiler\FileProfilerStorage" public="false">
+<<<<<<< HEAD
+          <argument>file:C:\wamp\www\ApiProject\app\cache\dev/profiler</argument>
+=======
           <argument>file:C:\wamp\www\SymfonyProject\app\cache\dev/profiler</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
           <argument></argument>
           <argument></argument>
           <argument>86400</argument>
@@ -1869,12 +1922,28 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
+<<<<<<< HEAD
             <argument>5580f172e0f2c</argument>
+=======
+<<<<<<< HEAD
+            <argument>5580e52f7c0b8</argument>
+=======
+            <argument>5580e21a2fbab</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
+>>>>>>> 4526a3a7480492a3630f18fd155dc982e9b14c26
           </service>
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
+<<<<<<< HEAD
             <argument>5580f172e0f2c</argument>
+=======
+<<<<<<< HEAD
+            <argument>5580e52f7c0b8</argument>
+=======
+            <argument>5580e21a2fbab</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
+>>>>>>> 4526a3a7480492a3630f18fd155dc982e9b14c26
           </service>
         </argument>
       </argument>
@@ -2114,7 +2183,15 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
+<<<<<<< HEAD
             <argument>5580f172e0f2c</argument>
+=======
+<<<<<<< HEAD
+            <argument>5580e52f7c0b8</argument>
+=======
+            <argument>5580e21a2fbab</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
+>>>>>>> 4526a3a7480492a3630f18fd155dc982e9b14c26
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2158,7 +2235,15 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
+<<<<<<< HEAD
             <argument>5580f172e0f2c</argument>
+=======
+<<<<<<< HEAD
+            <argument>5580e52f7c0b8</argument>
+=======
+            <argument>5580e21a2fbab</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
+>>>>>>> 4526a3a7480492a3630f18fd155dc982e9b14c26
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2188,7 +2273,11 @@
           <argument>form_div_layout.html.twig</argument>
         </argument>
         <argument key="autoescape">filename</argument>
+<<<<<<< HEAD
+        <argument key="cache">C:\wamp\www\ApiProject\app\cache\dev/twig</argument>
+=======
         <argument key="cache">C:\wamp\www\SymfonyProject\app\cache\dev/twig</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
         <argument key="charset">UTF-8</argument>
         <argument key="paths" type="collection"/>
         <argument key="date" type="collection">
@@ -2503,7 +2592,11 @@
             </argument>
             <argument type="service">
               <service class="Assetic\Cache\ConfigCache" public="false">
+<<<<<<< HEAD
+                <argument>C:\wamp\www\ApiProject\app\cache\dev/assetic/config</argument>
+=======
                 <argument>C:\wamp\www\SymfonyProject\app\cache\dev/assetic/config</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
               </service>
             </argument>
             <argument>true</argument>
@@ -2553,7 +2646,11 @@
       <argument type="service" id="profiler" on-invalid="null"/>
     </service>
     <service id="assetic.cache" class="Assetic\Cache\FilesystemCache" public="false">
+<<<<<<< HEAD
+      <argument>C:\wamp\www\ApiProject\app\cache\dev/assetic/assets</argument>
+=======
       <argument>C:\wamp\www\SymfonyProject\app\cache\dev/assetic/assets</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     </service>
     <service id="assetic.request_listener" class="Symfony\Bundle\AsseticBundle\EventListener\RequestListener">
       <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
@@ -2688,7 +2785,11 @@
             </argument>
           </call>
           <call method="setProxyDir">
+<<<<<<< HEAD
+            <argument>C:\wamp\www\ApiProject\app\cache\dev/doctrine/orm/Proxies</argument>
+=======
             <argument>C:\wamp\www\SymfonyProject\app\cache\dev/doctrine/orm/Proxies</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
           </call>
           <call method="setProxyNamespace">
             <argument>Proxies</argument>
@@ -3494,7 +3595,11 @@
       <argument>true</argument>
     </service>
     <service id="session.storage.filesystem" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage">
+<<<<<<< HEAD
+      <argument>C:\wamp\www\ApiProject\app\cache\dev/sessions</argument>
+=======
       <argument>C:\wamp\www\SymfonyProject\app\cache\dev/sessions</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
       <argument>MOCKSESSID</argument>
       <argument type="service" id="session.storage.metadata_bag"/>
     </service>
@@ -3509,9 +3614,15 @@
     <service id="router" class="Symfony\Bundle\FrameworkBundle\Routing\Router">
       <tag name="monolog.logger" channel="router"/>
       <argument type="service" id="service_container"/>
+<<<<<<< HEAD
+      <argument>C:\wamp\www\ApiProject\app\cache\dev/assetic/routing.yml</argument>
+      <argument type="collection">
+        <argument key="cache_dir">C:\wamp\www\ApiProject\app\cache\dev</argument>
+=======
       <argument>C:\wamp\www\SymfonyProject\app\cache\dev/assetic/routing.yml</argument>
       <argument type="collection">
         <argument key="cache_dir">C:\wamp\www\SymfonyProject\app\cache\dev</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\UrlGenerator</argument>
         <argument key="generator_base_class">Symfony\Component\Routing\Generator\UrlGenerator</argument>
@@ -3531,7 +3642,11 @@
       <argument type="service">
         <service class="Doctrine\Common\Annotations\AnnotationReader" public="false"/>
       </argument>
+<<<<<<< HEAD
+      <argument>C:\wamp\www\ApiProject\app\cache\dev/annotations</argument>
+=======
       <argument>C:\wamp\www\SymfonyProject\app\cache\dev/annotations</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
       <argument>true</argument>
     </service>
     <service id="security.encoder_factory" class="Symfony\Component\Security\Core\Encoder\EncoderFactory">
@@ -3590,11 +3705,19 @@
         <argument>MTIUserBackOffice</argument>
       </call>
       <call method="addPath">
+<<<<<<< HEAD
+        <argument>C:\wamp\www\ApiProject\src\MTI\LeBonCoinBundle/Resources/views</argument>
+        <argument>MTILeBonCoin</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
+=======
         <argument>C:\wamp\www\SymfonyProject\src\MTI\LeBonCoinBundle/Resources/views</argument>
         <argument>MTILeBonCoin</argument>
       </call>
       <call method="addPath">
         <argument>C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
         <argument>Debug</argument>
       </call>
       <call method="addPath">
@@ -3718,6 +3841,27 @@
                 <argument type="service">
                   <service class="Metadata\Driver\FileLocator" public="false">
                     <argument type="collection">
+<<<<<<< HEAD
+                      <argument key="Symfony\Bundle\FrameworkBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\FrameworkBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\SecurityBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\TwigBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\TwigBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\MonologBundle">C:\wamp\www\ApiProject\vendor\symfony\monolog-bundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\SwiftmailerBundle">C:\wamp\www\ApiProject\vendor\symfony\swiftmailer-bundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\AsseticBundle">C:\wamp\www\ApiProject\vendor\symfony\assetic-bundle/Resources/config/serializer</argument>
+                      <argument key="Doctrine\Bundle\DoctrineBundle">C:\wamp\www\ApiProject\vendor\doctrine\doctrine-bundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\FrameworkExtraBundle">C:\wamp\www\ApiProject\vendor\sensio\framework-extra-bundle/Resources/config/serializer</argument>
+                      <argument key="AppBundle">C:\wamp\www\ApiProject\src\AppBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\HelloWorldBundle">C:\wamp\www\ApiProject\src\MTI\HelloWorldBundle/Resources/config/serializer</argument>
+                      <argument key="FOS\RestBundle">C:\wamp\www\ApiProject\vendor\friendsofsymfony\rest-bundle\FOS\RestBundle/Resources/config/serializer</argument>
+                      <argument key="JMS\SerializerBundle">C:\wamp\www\ApiProject\vendor\jms\serializer-bundle\JMS\SerializerBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\ApiProjectHomeBundle">C:\wamp\www\ApiProject\src\MTI\ApiProjectHomeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\UserBackOfficeBundle">C:\wamp\www\ApiProject\src\MTI\UserBackOfficeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\LeBonCoinBundle">C:\wamp\www\ApiProject\src\MTI\LeBonCoinBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\DebugBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\ApiProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\GeneratorBundle">C:\wamp\www\ApiProject\vendor\sensio\generator-bundle\Sensio\Bundle\GeneratorBundle/Resources/config/serializer</argument>
+=======
                       <argument key="Symfony\Bundle\FrameworkBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\FrameworkBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\SecurityBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\TwigBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\TwigBundle/Resources/config/serializer</argument>
@@ -3737,6 +3881,7 @@
                       <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\SymfonyProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\GeneratorBundle">C:\wamp\www\SymfonyProject\vendor\sensio\generator-bundle\Sensio\Bundle\GeneratorBundle/Resources/config/serializer</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
                     </argument>
                   </service>
                 </argument>
@@ -3747,6 +3892,27 @@
                 <argument type="service">
                   <service class="Metadata\Driver\FileLocator" public="false">
                     <argument type="collection">
+<<<<<<< HEAD
+                      <argument key="Symfony\Bundle\FrameworkBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\FrameworkBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\SecurityBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\TwigBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\TwigBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\MonologBundle">C:\wamp\www\ApiProject\vendor\symfony\monolog-bundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\SwiftmailerBundle">C:\wamp\www\ApiProject\vendor\symfony\swiftmailer-bundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\AsseticBundle">C:\wamp\www\ApiProject\vendor\symfony\assetic-bundle/Resources/config/serializer</argument>
+                      <argument key="Doctrine\Bundle\DoctrineBundle">C:\wamp\www\ApiProject\vendor\doctrine\doctrine-bundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\FrameworkExtraBundle">C:\wamp\www\ApiProject\vendor\sensio\framework-extra-bundle/Resources/config/serializer</argument>
+                      <argument key="AppBundle">C:\wamp\www\ApiProject\src\AppBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\HelloWorldBundle">C:\wamp\www\ApiProject\src\MTI\HelloWorldBundle/Resources/config/serializer</argument>
+                      <argument key="FOS\RestBundle">C:\wamp\www\ApiProject\vendor\friendsofsymfony\rest-bundle\FOS\RestBundle/Resources/config/serializer</argument>
+                      <argument key="JMS\SerializerBundle">C:\wamp\www\ApiProject\vendor\jms\serializer-bundle\JMS\SerializerBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\ApiProjectHomeBundle">C:\wamp\www\ApiProject\src\MTI\ApiProjectHomeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\UserBackOfficeBundle">C:\wamp\www\ApiProject\src\MTI\UserBackOfficeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\LeBonCoinBundle">C:\wamp\www\ApiProject\src\MTI\LeBonCoinBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\DebugBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\ApiProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\GeneratorBundle">C:\wamp\www\ApiProject\vendor\sensio\generator-bundle\Sensio\Bundle\GeneratorBundle/Resources/config/serializer</argument>
+=======
                       <argument key="Symfony\Bundle\FrameworkBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\FrameworkBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\SecurityBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\TwigBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\TwigBundle/Resources/config/serializer</argument>
@@ -3766,6 +3932,7 @@
                       <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\SymfonyProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\GeneratorBundle">C:\wamp\www\SymfonyProject\vendor\sensio\generator-bundle\Sensio\Bundle\GeneratorBundle/Resources/config/serializer</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
                     </argument>
                   </service>
                 </argument>
@@ -3776,6 +3943,27 @@
                 <argument type="service">
                   <service class="Metadata\Driver\FileLocator" public="false">
                     <argument type="collection">
+<<<<<<< HEAD
+                      <argument key="Symfony\Bundle\FrameworkBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\FrameworkBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\SecurityBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\TwigBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\TwigBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\MonologBundle">C:\wamp\www\ApiProject\vendor\symfony\monolog-bundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\SwiftmailerBundle">C:\wamp\www\ApiProject\vendor\symfony\swiftmailer-bundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\AsseticBundle">C:\wamp\www\ApiProject\vendor\symfony\assetic-bundle/Resources/config/serializer</argument>
+                      <argument key="Doctrine\Bundle\DoctrineBundle">C:\wamp\www\ApiProject\vendor\doctrine\doctrine-bundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\FrameworkExtraBundle">C:\wamp\www\ApiProject\vendor\sensio\framework-extra-bundle/Resources/config/serializer</argument>
+                      <argument key="AppBundle">C:\wamp\www\ApiProject\src\AppBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\HelloWorldBundle">C:\wamp\www\ApiProject\src\MTI\HelloWorldBundle/Resources/config/serializer</argument>
+                      <argument key="FOS\RestBundle">C:\wamp\www\ApiProject\vendor\friendsofsymfony\rest-bundle\FOS\RestBundle/Resources/config/serializer</argument>
+                      <argument key="JMS\SerializerBundle">C:\wamp\www\ApiProject\vendor\jms\serializer-bundle\JMS\SerializerBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\ApiProjectHomeBundle">C:\wamp\www\ApiProject\src\MTI\ApiProjectHomeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\UserBackOfficeBundle">C:\wamp\www\ApiProject\src\MTI\UserBackOfficeBundle/Resources/config/serializer</argument>
+                      <argument key="MTI\LeBonCoinBundle">C:\wamp\www\ApiProject\src\MTI\LeBonCoinBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\DebugBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/config/serializer</argument>
+                      <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\ApiProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\ApiProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
+                      <argument key="Sensio\Bundle\GeneratorBundle">C:\wamp\www\ApiProject\vendor\sensio\generator-bundle\Sensio\Bundle\GeneratorBundle/Resources/config/serializer</argument>
+=======
                       <argument key="Symfony\Bundle\FrameworkBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\FrameworkBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\SecurityBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle/Resources/config/serializer</argument>
                       <argument key="Symfony\Bundle\TwigBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\TwigBundle/Resources/config/serializer</argument>
@@ -3795,6 +3983,7 @@
                       <argument key="Symfony\Bundle\WebProfilerBundle">C:\wamp\www\SymfonyProject\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\DistributionBundle">C:\wamp\www\SymfonyProject\vendor\sensio\distribution-bundle\Sensio\Bundle\DistributionBundle/Resources/config/serializer</argument>
                       <argument key="Sensio\Bundle\GeneratorBundle">C:\wamp\www\SymfonyProject\vendor\sensio\generator-bundle\Sensio\Bundle\GeneratorBundle/Resources/config/serializer</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
                     </argument>
                   </service>
                 </argument>
@@ -3840,7 +4029,11 @@
           <call method="setCache">
             <argument type="service">
               <service class="Metadata\Cache\FileCache" public="false">
+<<<<<<< HEAD
+                <argument>C:\wamp\www\ApiProject\app\cache\dev/jms_serializer</argument>
+=======
                 <argument>C:\wamp\www\SymfonyProject\app\cache\dev/jms_serializer</argument>
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
               </service>
             </argument>
           </call>

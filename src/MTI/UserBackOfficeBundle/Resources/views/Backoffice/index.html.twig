@@ -16,6 +16,7 @@
 		    <script src="{{asset('js/gauge.js')}}"></script>
         <script src="{{asset('js/chart.js')}}"></script>
         <script src="{{asset('js/chartjslegend.js')}}"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['geochart']}]}"></script>
     </head>
     <body>
         {% include "::navbar.html.twig" %}
@@ -74,6 +75,11 @@
                 <h3 style="margin-bottom:27px;">Nombre d'appels</h3>
                 <canvas id="myChart2" width="550" height="231" style="margin: 0"></canvas>
               </div>
+                </div>
+            </div>
+            <div class="col-sm-12" style="margin-top: 25px; margin-bottom: 50px">
+                <div style="padding: 0; margin: 0; background-color: white; overflow: hidden">
+                  <div id="regions_div" style="height: 500px; float: right; margin-top: -5px"></div>
                 </div>
             </div>
           </div>
@@ -201,6 +207,43 @@
         </div>
     </div>
 		<script type="text/javascript">
+<<<<<<< HEAD
+
+        google.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+
+        /*var data = google.visualization.arrayToDataTable([
+            ['Province', 'Popularity'],
+            ['Ile-de-France', 200],
+            ['Alsace', 300],
+            ['Aquitaine', 400],
+            ['Guyane', 1000],
+        ]);*/
+
+        var data = [
+            ['Province', 'Popularity'],
+            {% for key in callregion %}
+                ['{{ key['region'] }}', {{ key[1] }}],
+            {% endfor %}
+        ];
+        console.log(data);
+        var data = google.visualization.arrayToDataTable(data);
+
+        var options = {
+            'region': 'FR',
+            'resolution': 'provinces',
+            'colorAxis': {colors: ['#79c5ff', '#0a4e82']},
+            'backgroundColor': 'transparent'
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+
+=======
+>>>>>>> 7f454364557bdd4f7c53a5adde74c8b0cb3d65fa
     $('#sidebar a').click(function (e) {
       console.log("ok");
       e.preventDefault();

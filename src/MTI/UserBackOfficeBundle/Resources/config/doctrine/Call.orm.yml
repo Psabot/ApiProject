@@ -14,6 +14,10 @@ MTI\UserBackOfficeBundle\Entity\Call:
             length: 11
         created:
             type: datetime
+        region:
+            type: string
+            length: 100
+            nullable: TRUE
 
     lifecycleCallbacks:
         prePersist: [setCreatedValue]

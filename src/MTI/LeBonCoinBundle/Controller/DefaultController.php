@@ -187,7 +187,7 @@ class DefaultController extends Controller
 
         $request_type = ($type_url == 'p') ? 1 : (($type_url == 'c') ? 2 : 0);
 
-        ParsingTools::addRequest($this, $profile, $request_type);
+        ParsingTools::addRequest($this, $profile, $request_type, ParsingTools::$regions_match[$region_url]);
 
         return $response;
     }
@@ -358,7 +358,7 @@ class DefaultController extends Controller
 
         $request_type = ($type_url == 'p') ? 4 : (($type_url == 'c') ? 5 : 3);
 
-        ParsingTools::addRequest($this, $profile, $request_type);
+        ParsingTools::addRequest($this, $profile, $request_type, ParsingTools::$regions_match[$region_url]);
 
         return $response;
     }
@@ -457,7 +457,7 @@ class DefaultController extends Controller
         $response->setContent($response_json);
         $response->headers->set('Content-Type', 'application/json');
 
-        ParsingTools::addRequest($this, $profile, 6);
+        ParsingTools::addRequest($this, $profile, 6, null);
 
         return $response;
     }
@@ -540,7 +540,7 @@ class DefaultController extends Controller
 
         $response->headers->set('Content-Type', 'application/json');
 
-        ParsingTools::addRequest($this, $profile, 7);
+        ParsingTools::addRequest($this, $profile, 7, null);
 
         return $response;
     }
@@ -889,7 +889,7 @@ class DefaultController extends Controller
 
         $response->headers->set('Content-Type', 'application/json');
 
-        ParsingTools::addRequest($this, $profile, 8);
+        ParsingTools::addRequest($this, $profile, 8, null);
 
         return $response;
     }
