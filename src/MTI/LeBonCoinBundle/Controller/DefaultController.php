@@ -41,6 +41,8 @@ class DefaultController extends Controller
         $towns_url = $request->query->get('towns');
         $type_url = $request->query->get('type');
         $query_url = $request->query->get('query');
+        $pmin_url = $request->query->get('pmin');
+        $pmax_url = $request->query->get('pmax');
         if ($type_url != null && $type_url == 'ind') $type_url = 'p';
         else if ($type_url != null && $type_url == 'pro') $type_url = 'c';
         else $type_url = 'a';
@@ -50,6 +52,8 @@ class DefaultController extends Controller
         if ($sort_url != null) $request_url .= "&sp=".$sort_url;
         if ($type_url != null) $request_url .= "&f=".$type_url;
         if ($query_url != null) $request_url .= "&q=".$query_url;
+        if ($pmin_url != null) $request_url .= "&ps=".$pmin_url;
+        if ($pmax_url != null) $request_url .= "&pe=".$pmax_url;
         //echo $request_url;
 
         $html = file_get_html($request_url);
@@ -207,6 +211,8 @@ class DefaultController extends Controller
         $towns_url = $request->query->get('towns');
         $type_url = $request->query->get('type');
         $query_url = $request->query->get('query');
+        $pmin_url = $request->query->get('pmin');
+        $pmax_url = $request->query->get('pmax');
         if ($type_url != null && $type_url == 'ind') $type_url = 'p';
         else if ($type_url != null && $type_url == 'pro') $type_url = 'c';
         else $type_url = 'a';
@@ -216,6 +222,8 @@ class DefaultController extends Controller
         if ($sort_url != null) $request_url .= "&sp=".$sort_url;
         if ($type_url != null) $request_url .= "&f=".$type_url;
         if ($query_url != null) $request_url .= "&q=".$query_url;
+        if ($pmin_url != null) $request_url .= "&ps=".$pmin_url;
+        if ($pmax_url != null) $request_url .= "&pe=".$pmax_url;
         //echo $request_url;
         $html = file_get_html($request_url);
 
@@ -529,6 +537,358 @@ class DefaultController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         ParsingTools::addRequest($this, $profile, 7);
+
+        return $response;
+    }
+
+    public function postAction(Request $request) {
+        extract($_POST);
+
+        $token_url = $request->query->get('token');
+        $checkUserCall = new CheckUserCall($this->getDoctrine());
+        $profile = $checkUserCall->check($token_url);
+        
+        if (is_string($profile)) {
+            $response = new Response();
+            if ($profile == 'errorTokenMissing') $response->setContent(json_encode(array('error' => 'Please provide your user token')));
+            else if ($profile == 'errorBadToken') $response->setContent(json_encode(array('error' => 'Please provide a token with valid format')));
+            else if ($profile == 'errorNoAccount') $response->setContent(json_encode(array('error' => 'No matching account for this token')));
+            else $response->setContent(json_encode(array('error' => 'You have reach your request limit')));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
+        /*$name_post = $request->request->get('name');
+        $email_post = $request->request->get('email');
+        $phone_post = $request->request->get('phone');
+        $body_post = $request->request->get('body');
+
+        if ($name_post == null || $email_post == null || $body_post == null) {
+            $response = new Response();
+            $response->setContent(json_encode(array('error' => 'Please provide all required options to send the mail to the announcer')));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }*/
+
+        //set POST variables
+        $url = 'http://www2.leboncoin.fr/ai/verify/1';
+        $fields = array(
+            /*'category' => urlencode($category_post),
+            'company_ad' => urlencode($company_ad_post),
+            'type' => urlencode($type_post),
+            'region' => urlencode($region_post),
+            'dpt_code' => urlencode($dpt_code_post),
+            'zipcode' => urlencode($zipcode_post),
+            'city' => urlencode($city_post),
+            'name' => urlencode($name_post),
+            'email' => urlencode($email_post),
+            'phone' => urlencode($phone_post),
+            'phone_hidden' => urlencode($phone_hidden_post),
+            'no_salesmen' => urlencode($no_salesmen_post),
+            'subject' => urlencode($subject_post),
+            'body' => urlencode($body_post),
+            'price' => urlencode($price_post),*/
+            'category' => urlencode('38'),
+            'company_ad' => urlencode('0'),
+            'type' => urlencode('s'),
+            'region' => urlencode('12'),
+            'dpt_code' => urlencode('92'),
+            'zipcode' => urlencode('92800'),
+            'city' => urlencode('Puteaux'),
+            'name' => urlencode('Tommy'),
+            'email' => urlencode('tommy.lopes@epita.fr'),
+            'phone' => urlencode('0659301096'),
+            'phone_hidden' => urlencode('1'),
+            'no_salesmen' => urlencode('1'),
+            'subject' => urlencode('Un objet test'),
+            'body' => urlencode('un super objet trop beau qui va faire fureur'),
+            'price' => urlencode('10'),
+
+            /*'check_type_diff' => '0',
+            'address' => null,
+            'accept_localisation' => 'on',
+            'latitude' => null,
+            'longitude' => null,
+            'geo_source' => null,
+            'geo_provider' => null,
+            'meeting_point_id' => null,
+            'siren' => null,
+            'clothing_type' => '0',
+            'clothing_st' => '0',
+            'shoe_type' => '0',
+            'shoe_size' => '0',
+            'baby_age' => null,
+            'jobcontract' => '0',
+            'jobfield' => '0',
+            'jobduty' => '0',
+            'jobexp' => '0',
+            'jobstudy' => '0',
+            'jobtime' => '1',
+            'brand' => null,
+            'regdate' => null,
+            'mileage' => null,
+            'real_estate_type' => null,
+            'square' => null,
+            'rooms' => null,
+            'furnished' => null,
+            'energy_rate' => null,
+            'ges' => null,
+            'capacity' => null,
+            'swimming_pool' => null,
+            'bedrooms' => null,
+
+            'datepicker_begin_date_0' => null,
+            'availability_begin_date_0' => null,
+            'datepicker_end_date_0' => null,
+            'availability_end_date_0' => null,
+            'availability_price_0' => null,
+
+            'datepicker_begin_date_1' => null,
+            'availability_begin_date_1' => null,
+            'datepicker_end_date_1' => null,
+            'availability_end_date_1' => null,
+            'availability_price_1' => null,
+
+            'datepicker_begin_date_2' => null,
+            'availability_begin_date_2' => null,
+            'datepicker_end_date_2' => null,
+            'availability_end_date_2' => null,
+            'availability_price_2' => null,
+
+            'datepicker_begin_date_3' => null,
+            'availability_begin_date_3' => null,
+            'datepicker_end_date_3' => null,
+            'availability_end_date_3' => null,
+            'availability_price_3' => null,
+
+            'datepicker_begin_date_4' => null,
+            'availability_begin_date_4' => null,
+            'datepicker_end_date_4' => null,
+            'availability_end_date_4' => null,
+            'availability_price_4' => null,
+
+            'datepicker_begin_date_5' => null,
+            'availability_begin_date_5' => null,
+            'datepicker_end_date_5' => null,
+            'availability_end_date_5' => null,
+            'availability_price_5' => null,
+
+            'datepicker_begin_date_6' => null,
+            'availability_begin_date_6' => null,
+            'datepicker_end_date_6' => null,
+            'availability_end_date_6' => null,
+            'availability_price_6' => null,
+
+            'datepicker_begin_date_7' => null,
+            'availability_begin_date_7' => null,
+            'datepicker_end_date_7' => null,
+            'availability_end_date_7' => null,
+            'availability_price_7' => null,
+
+            'datepicker_begin_date_8' => null,
+            'availability_begin_date_8' => null,
+            'datepicker_end_date_8' => null,
+            'availability_end_date_8' => null,
+            'availability_price_8' => null,
+
+            'datepicker_begin_date_9' => null,
+            'availability_begin_date_9' => null,
+            'datepicker_end_date_9' => null,
+            'availability_end_date_9' => null,
+            'availability_price_9' => null,
+
+            'datepicker_begin_date_10' => null,
+            'availability_begin_date_10' => null,
+            'datepicker_end_date_10' => null,
+            'availability_end_date_10' => null,
+            'availability_price_10' => null,
+
+            'datepicker_begin_date_11' => null,
+            'availability_begin_date_11' => null,
+            'datepicker_end_date_11' => null,
+            'availability_end_date_11' => null,
+            'availability_price_11' => null,
+
+            'datepicker_begin_date_12' => null,
+            'availability_begin_date_12' => null,
+            'datepicker_end_date_12' => null,
+            'availability_end_date_12' => null,
+            'availability_price_12' => null,
+
+            'datepicker_begin_date_13' => null,
+            'availability_begin_date_13' => null,
+            'datepicker_end_date_13' => null,
+            'availability_end_date_13' => null,
+            'availability_price_13' => null,
+
+            'datepicker_begin_date_14' => null,
+            'availability_begin_date_14' => null,
+            'datepicker_end_date_14' => null,
+            'availability_end_date_14' => null,
+            'availability_price_14' => null,
+
+            'datepicker_begin_date_15' => null,
+            'availability_begin_date_15' => null,
+            'datepicker_end_date_15' => null,
+            'availability_end_date_15' => null,
+            'availability_price_15' => null,
+
+            'datepicker_begin_date_16' => null,
+            'availability_begin_date_16' => null,
+            'datepicker_end_date_16' => null,
+            'availability_end_date_16' => null,
+            'availability_price_16' => null,
+
+            'datepicker_begin_date_17' => null,
+            'availability_begin_date_17' => null,
+            'datepicker_end_date_17' => null,
+            'availability_end_date_17' => null,
+            'availability_price_17' => null,
+
+            'datepicker_begin_date_18' => null,
+            'availability_begin_date_18' => null,
+            'datepicker_end_date_18' => null,
+            'availability_end_date_18' => null,
+            'availability_price_18' => null,
+
+            'datepicker_begin_date_19' => null,
+            'availability_begin_date_19' => null,
+            'datepicker_end_date_19' => null,
+            'availability_end_date_19' => null,
+            'availability_price_19' => null,
+
+            'datepicker_begin_date_20' => null,
+            'availability_begin_date_20' => null,
+            'datepicker_end_date_20' => null,
+            'availability_end_date_20' => null,
+            'availability_price_20' => null,
+
+            'datepicker_begin_date_21' => null,
+            'availability_begin_date_21' => null,
+            'datepicker_end_date_21' => null,
+            'availability_end_date_21' => null,
+            'availability_price_21' => null,
+
+            'datepicker_begin_date_22' => null,
+            'availability_begin_date_22' => null,
+            'datepicker_end_date_22' => null,
+            'availability_end_date_22' => null,
+            'availability_price_22' => null,
+
+            'datepicker_begin_date_23' => null,
+            'availability_begin_date_23' => null,
+            'datepicker_end_date_23' => null,
+            'availability_end_date_23' => null,
+            'availability_price_23' => null,
+
+            'price_min' => null,
+            'price_max' => null,
+            'cubic_capacity' => null,
+            'fuel' => null,
+            'gearbox' => '0',
+            'animal_type' => '0',
+            'animal_race' => '0',
+            'animal_litter' => null,
+            'animal_age' => '0',
+            'animal_identification' => null,
+            'custom_ref' => null,
+            'charges_included' => null,
+            'fai_included' => null,
+
+            'image0' => null,
+            'image1' => null,
+            'image2' => null,
+            'image3' => null,
+            'image4' => null,
+            'image5' => null,
+            'image6' => null,
+            'image7' => null,
+            'image8' => null,
+            'image9' => null,
+
+            'validate' => 'Valider'*/
+        );
+
+
+        //url-ify the data for the POST
+        $fields_string = '';
+        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
+
+        //open connection
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'http://www2.leboncoin.fr/ai/form/1?ca=12_k');
+        curl_setopt($ch, CURLOPT_POST, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "");
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt ($ch, CURLOPT_COOKIEJAR, COOKIE_FILE);
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt ($ch, CURLOPT_COOKIEFILE, COOKIE_FILE);
+        curl_exec($ch);
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, count($fields));
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+
+        //execute post
+        $result = curl_exec($ch);
+        //echo $result;
+
+        $url = 'http://www2.leboncoin.fr/ai/create/1';
+        $fields = array(
+            /*'category' => urlencode($category_post),
+            'company_ad' => urlencode($company_ad_post),
+            'type' => urlencode($type_post),
+            'region' => urlencode($region_post),
+            'dpt_code' => urlencode($dpt_code_post),
+            'zipcode' => urlencode($zipcode_post),
+            'city' => urlencode($city_post),
+            'name' => urlencode($name_post),
+            'email' => urlencode($email_post),
+            'phone' => urlencode($phone_post),
+            'phone_hidden' => urlencode($phone_hidden_post),
+            'no_salesmen' => urlencode($no_salesmen_post),
+            'subject' => urlencode($subject_post),
+            'body' => urlencode($body_post),
+            'price' => urlencode($price_post),*/
+            'ca' => urlencode('12_s'),
+            'category' => urlencode('38'),
+            'city' => urlencode('Puteaux'),
+            'passwd' => urlencode('12345'),
+            'passwd_ver' => urlencode('12345'),
+            'create' => urlencode('Valider'),
+            'create2' => urlencode('Valider'),
+        );
+
+        //url-ify the data for the POST
+        $fields_string = '';
+        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, count($fields));
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+
+        //execute post
+        $result = curl_exec($ch);
+        //echo $result;
+
+        //close connection
+        curl_close($ch);
+
+        $response = new Response();
+
+        //echo json_decode($response_json);
+        if ($result != false && strpos($result,'Un email de confirmation vient de vous &ecirc;tre envoy&eacute;') != false) $response->setContent(json_encode(array('success' => 'Ad succuessfully published on the website')));
+        else $response->setContent(json_encode(array('error' => 'A problem occured while publishing the ad on the website')));
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        ParsingTools::addRequest($this, $profile, 8);
 
         return $response;
     }
