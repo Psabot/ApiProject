@@ -256,6 +256,7 @@ body
 
 .imagethumb
 {
+  height: 100px;
   width: 100%;
 }
 
@@ -264,16 +265,17 @@ body
   background: #fca932;
   font-weight: bold;
   position: absolute;
+  font-size: 15px;
   right: 0px;
-  bottom: 15px;
+  bottom: 17px;
 }
 
 .date
 {
   position: absolute;
-  right: 70px;
-  bottom: 12px;
-  font-size: 11px;
+  right: 90px;
+  bottom: 17px;
+  font-size: 12px;
   font-style: italic;
   opacity: 0.6;
 }

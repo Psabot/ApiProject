@@ -36,7 +36,7 @@ class DefaultController extends Controller
             return $response;
         }
 
-        $region_url = (!in_array($request->query->get('region'), ParsingTools::$regions_map)) ? "ile_de_france" : $request->query->get('region');
+        $region_url = (!in_array($request->query->get('region'), ParsingTools::$regions_map)) ? null : $request->query->get('region');
         $category_url = (!in_array($request->query->get('category'), ParsingTools::$categories_map)) ? "annonces" : $request->query->get('category');
         $towns_url = $request->query->get('towns');
         $type_url = $request->query->get('type');
@@ -48,7 +48,7 @@ class DefaultController extends Controller
         else if ($type_url != null && $type_url == 'pro') $type_url = 'c';
         else $type_url = 'a';
         $sort_url = ($request->query->get('sort') == "price") ? 1 : 0;
-        $request_url = 'http://www.leboncoin.fr/'.$category_url.'/offres/'.$region_url."/?";
+        $request_url = 'http://www.leboncoin.fr/'.$category_url.'/offres/'.(($region_url == null) ? '' : $region_url.'/')."?";
         if ($towns_url != null) $request_url .= "&location=".$towns_url;
         if ($sort_url != null) $request_url .= "&sp=".$sort_url;
         if ($type_url != null) $request_url .= "&f=".$type_url;
@@ -172,7 +172,7 @@ class DefaultController extends Controller
             'professional' => ($nb_professional == null) ? null : preg_replace('/[\sa-zA-Z]+/', '', $nb_professional),
             'ads' => 'offers',
             'type' => ($type_url == 'p') ? 'ind' : (($type_url == 'c') ? 'pro' : 'all'),
-            'region' => $region_url,
+            'region' => ($region_url == null) ? 'All' : $region_url,
             'town' => $towns_url,
             'category' => $category_url,
             'sort' => ($sort_url == 1) ? 'price' : 'date',
@@ -187,7 +187,7 @@ class DefaultController extends Controller
 
         $request_type = ($type_url == 'p') ? 1 : (($type_url == 'c') ? 2 : 0);
 
-        ParsingTools::addRequest($this, $profile, $request_type, ParsingTools::$regions_match[$region_url], array_search($category_url, ParsingTools::$categories_map));
+        ParsingTools::addRequest($this, $profile, $request_type, ($region_url == null) ? null : ParsingTools::$regions_match[$region_url], array_search($category_url, ParsingTools::$categories_map));
 
         return $response;
     }
@@ -208,7 +208,7 @@ class DefaultController extends Controller
             return $response;
         }
 
-        $region_url = (!in_array($request->query->get('region'), ParsingTools::$regions_map)) ? "ile_de_france" : $request->query->get('region');
+        $region_url = (!in_array($request->query->get('region'), ParsingTools::$regions_map)) ? null : $request->query->get('region');
         $category_url = (!in_array($request->query->get('category'), ParsingTools::$categories_map)) ? "annonces" : $request->query->get('category');
         $towns_url = $request->query->get('towns');
         $type_url = $request->query->get('type');
@@ -220,7 +220,7 @@ class DefaultController extends Controller
         else if ($type_url != null && $type_url == 'pro') $type_url = 'c';
         else $type_url = 'a';
         $sort_url = ($request->query->get('sort') == "price") ? 1 : 0;
-        $request_url = 'http://www.leboncoin.fr/'.$category_url.'/demandes/'.$region_url."/?";
+        $request_url = 'http://www.leboncoin.fr/'.$category_url.'/demandes/'.(($region_url == null) ? '' : $region_url.'/')."?";
         if ($towns_url != null) $request_url .= "&location=".$towns_url;
         if ($sort_url != null) $request_url .= "&sp=".$sort_url;
         if ($type_url != null) $request_url .= "&f=".$type_url;
@@ -343,7 +343,7 @@ class DefaultController extends Controller
             'professional' => ($nb_professional == null) ? null : preg_replace('/[\sa-zA-Z]+/', '', $nb_professional),
             'ads' => 'demands',
             'type' => ($type_url == 'p') ? 'ind' : (($type_url == 'c') ? 'pro' : 'all'),
-            'region' => $region_url,
+            'region' => ($region_url == null) ? 'All' : $region_url,
             'town' => $towns_url,
             'category' => $category_url,
             'sort' => ($sort_url == 1) ? 'price' : 'date',
@@ -358,7 +358,7 @@ class DefaultController extends Controller
 
         $request_type = ($type_url == 'p') ? 4 : (($type_url == 'c') ? 5 : 3);
 
-        ParsingTools::addRequest($this, $profile, $request_type, ParsingTools::$regions_match[$region_url], array_search($category_url, ParsingTools::$categories_map));
+        ParsingTools::addRequest($this, $profile, $request_type, ($region_url == null) ? null : ParsingTools::$regions_match[$region_url], array_search($category_url, ParsingTools::$categories_map));
 
         return $response;
     }
