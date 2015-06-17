@@ -238,6 +238,7 @@ body
   height: 100%;
   overflow: scroll;
   position: fixed;
+  top: 152px;
 }
 
 .imageMain, .thumbs
@@ -270,7 +271,7 @@ body
 .date
 {
   position: absolute;
-  right: 50px;
+  right: 70px;
   bottom: 12px;
   font-size: 11px;
   font-style: italic;
@@ -319,4 +320,11 @@ body
 .aMail a
 {
   text-decoration: none;
+}
+
+.contact
+{
+  border-top: 1px solid;
+  padding-top: 15px;
+  margin-top: 15px;
 }
