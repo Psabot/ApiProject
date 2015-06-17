@@ -22,3 +22,4 @@ mti_le_bon_coin_homepage5:
 mti_le_bon_coin_homepage6:
     path:     /leboncoin/post/ad/
     defaults: { _controller: MTILeBonCoinBundle:Default:post }
+    methods:  [POST]
