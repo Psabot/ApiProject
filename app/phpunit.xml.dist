@@ -12,6 +12,7 @@
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
             <directory>../src/*Bundle/Tests</directory>
+			<directory>../src/MTI/UserBackOfficeBundle/Tests</directory>
         </testsuite>
     </testsuites>
 
