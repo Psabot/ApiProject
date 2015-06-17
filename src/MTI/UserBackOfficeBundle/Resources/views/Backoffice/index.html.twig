@@ -22,7 +22,7 @@
         {% include "::navbar.html.twig" %}
         <div id="sub-menu">
           <div id="burger-menu">
-            <div class="fa fa-bars"><span>Menu</span></div>
+            <div class="fa fa-bars" style="cursor: pointer"><span>Menu</span></div>
           </div>
           <div style="display: inline-block;padding-left:50px;">
             <span class="label label-success">Clé publique de l'API</span> {{ app.user.publicapikey }}
@@ -181,7 +181,7 @@
           <div id="annonce" class="col-md-8 col-md-offset-4">
           </div>
           <script type="text/javascript">
-            $.getJSON("{{ path('mti_le_bon_coin_homepage2') }}?token=TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=", function(data) {
+            $.getJSON("{{ path('mti_le_bon_coin_homepage2') }}?token={{ token }}", function(data) {
               $.each(data['articles'], function(index, value){
                 var str = "<div id='"+value['ref']+"' class='annoncesList'>"; 
                   str += "<a href='' class='displayAnnonce'>";
@@ -197,7 +197,12 @@
               $('#annonces a').click(function (e) {
                 e.preventDefault();
                 var ref = $(this).parent().attr('id');
-                var url ="/symfonyproject/web/app_dev.php/leboncoin/get/ads/"+ref+"/?token=TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=";
+                var placeholderurl = "{{ path('mti_le_bon_coin_homepage4', { 'adID': 'placeholder' }) }}?token={{ token }}";
+                var url = placeholderurl.replace('placeholder', ref);
+
+                var placeholderActionurl = "{{ path('mti_le_bon_coin_homepage5',{ 'adID': 'placeholder' }) }}?token={{ token }}";
+                var actionurl = placeholderActionurl.replace('placeholder', ref);
+
                 $.getJSON(url, function(data) {
                     $('#annonce').empty();
                     var str2 = "";
@@ -211,16 +216,20 @@
                       str2+="</div>";
                     }
                     str2+='<div class="contact" style="display:none">';
-                      str2+='<form action="/symfonyproject/web/app_dev.php/leboncoin/post/'+data['ref']+'/?token=TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=" method="post">';
-                        str2+='<input type="hidden" name="token" value="TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=" />';
-                        str2+='<input type="text" id="name" name="name" class="form-control" placeholder="Prenom"/> <br/>';
-                        str2+='<input type="text" id="email" name="email" placeholder="Email" class="form-control" /> <br/>';
-                        str2+='<input type="text" id="phone" name="phone" placeholder="Numéro de teléphone" class="form-control" /> ';
-                        str2+='<br/>';
-                        str2+='<textarea name="body" class="form-control"></textarea>'; 
-                        str2+='<br/>';
-                        str2+='<input type="submit" value="Envoyer" class="btn btn-primary" />';
-                      str2+='</form>';
+                      str2 += "<div class='sendingResponse'></div>";
+                      str2 += "<div class='innerContact'>";
+                        str2 += "<h3>Envoyer un mail à "+data['user']+"</h3>"
+                        str2+='<form action="'+actionurl+'" method="post">';
+                          str2+='<input type="hidden" name="token" value="TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=" />';
+                          str2+='<input type="text" id="name" name="name" class="form-control" placeholder="Prenom"/> <br/>';
+                          str2+='<input type="text" id="email" name="email" placeholder="Email" class="form-control" /> <br/>';
+                          str2+='<input type="text" id="phone" name="phone" placeholder="Numéro de teléphone" class="form-control" /> ';
+                          str2+='<br/>';
+                          str2+='<textarea name="body" class="form-control"></textarea>'; 
+                          str2+='<br/>';
+                          str2+='<input type="submit" value="Envoyer" class="btn btn-primary" />';
+                        str2+='</form>';
+                      str2+='</div>';
                     str2+='</div>';
                     str2 +="<div class='userInfos'>";
                       str2 += "<div class='userName'>"+data['user']+"</div>";
@@ -231,10 +240,9 @@
                       str2 +="</div>";
                       str2 += "<div class='aPrice'>Prix : "+data['price']+"€</div>";
                       str2 += "<div class='aDate'>Mise en ligne : "+data['date']+"</div>";
-                      str2 += "<div class='aMail'><a href=''><i class='fa fa-envelope-o'> </i>Envoyer un mail</a></div>";
+                      str2 += "<div class='aMail'><a href=''><i class='fa fa-envelope-o' style='margin-right:10px;'> </i>Envoyer un mail</a></div>";
                     str2 +="</div>"; 
                     str2 += "<h3 class='title'>"+data['title']+"</h3>";
-                    str2 += "<a href=''>hiuguddqsfgefvpudvfyvdpfv</a>"
                     str2 += "<div class='desc'>"+data['description']+"</div>";
                     $('#annonce').append(str2);
                 });
@@ -245,8 +253,51 @@
     </div>
 		<script type="text/javascript">
 
+    var lastScrollTop = 0;
+    var annonces_div = $('#annonces');
+    var submenu_div = $('#sub-menu');
+
+    function isScrolledIntoView(elem)
+    {
+        var $elem = $(elem);
+        var $window = $(window);
+
+        var docViewTop = $window.scrollTop();
+        var docViewBottom = docViewTop + $window.height();
+
+        var elemTop = $elem.offset().top;
+        var elemBottom = elemTop + $elem.height();
+
+        return ((elemBottom <= docViewBottom) && (elemBottom >= docViewTop-20));
+    }
+
+    $(window).scroll(function() {
+       if(isScrolledIntoView(submenu_div)) {
+         var pos = submenu_div.offset().top + 55 - $(window).scrollTop();
+         annonces_div.css('top', pos + 20);
+       }
+       else {
+          annonces_div.css('top', 5);
+       }
+
+
+    });
+      $(document).on("submit", "form", function(event) {
+        event.preventDefault();
+        var dataToBeSent = $(this).serialize();
+        var url = $(this).attr('action');
+        console.log(dataToBeSent);
+        $.post(url, dataToBeSent, function(data, textStatus) {
+          $('.innerContact').fadeOut();
+          if(textStatus == "success")
+            $('.contact').append('<div class="alert alert-success" role="alert">'+data['success']+'</div>');
+          else
+            $('.contact').append('<div class="alert alert-error" role="alert">'+data['error']+'</div>');
+        }, "json");
+      });
+
       $(document).on( "click", "#annonce a", function(event) {
-        console.log($(this).parent().parent().parent().find(".contact"));
+        $(this).parent().parent().parent().find(".contact").fadeIn();
         event.preventDefault();
       });
 
