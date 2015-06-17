@@ -29,7 +29,7 @@
             <span class="label label-default" style="margin-left:50px">Token généré</span> {{ token }}
           </div>
         </div>
-        <div id="sidebar" role="tablist">
+        <div id="sidebar" role="tablist" style="margin-left: -240px; display: none;">
           <ul>
             <li role="presentation">
               <a href="#dashboard" id="dashboard-tab" role="tab" data-toggle="tab" aria-controls="dashboard" aria-expanded="true">
@@ -72,40 +72,85 @@
                 </div>
             </div>
           </div>
-          <div role="tabpanel" id="profile" class="tab-pane fade col-md-6" aria-labelledby="profile-tab">
-            <div class="panel panel-default" id="profile-settings">
-            <div class="panel-heading">
-              <i class="fa fa-user"></i> Profil
-            </div>
-            <div class="panel-body">
-              <div class="form-group group-clear">
-                <label class="col-sm-3 control-label">Prénom:</label>
-                <div class="col-sm-8">{{app.user.username}}</div>
-              </div>
-              <div class="form-group group-clear">
-                <label class="col-sm-3 control-label">Nom:</label>
-                <div class="col-sm-8">{{app.user.lastname}}</div>
-              </div>
-              <div class="form-group group-clear">
-                <label class="col-sm-3 control-label">Email:</label>
-                <div class="col-sm-8">{{app.user.email}}</div>
-              </div>
-              <div class="form-group group-clear">
-                <label class="col-sm-3 control-label">Forfait:</label>
-                <div class="col-sm-8">
-                  {% if app.user.subscribe == 1 %}
-                    Basique
-                  {% endif %}
-                  {% if app.user.subscribe == 2 %}
-                    Pro
-                  {% endif %}
-                  {% if app.user.subscribe == 3 %}
-                    Premium
-                  {% endif %}
+          <div role="tabpanel" id="profile" class="tab-pane fade" aria-labelledby="profile-tab">
+            <div class="col-md-5">
+              <div class="panel panel-default" id="profile-settings" style="padding-left:0px;padding-right:0px;">
+                <div class="panel-heading">
+                  <i class="fa fa-user"></i> Profil
+                </div>
+                <div class="panel-body">
+                  <div class="form-group group-clear">
+                    <label class="col-sm-3 control-label">Prénom:</label>
+                    <div class="col-sm-8">{{app.user.username}}</div>
+                  </div>
+                  <div class="form-group group-clear">
+                    <label class="col-sm-3 control-label">Nom:</label>
+                    <div class="col-sm-8">{{app.user.lastname}}</div>
+                  </div>
+                  <div class="form-group group-clear">
+                    <label class="col-sm-3 control-label">Email:</label>
+                    <div class="col-sm-8">{{app.user.email}}</div>
+                  </div>
+                  <div class="form-group group-clear">
+                    <label class="col-sm-3 control-label">Forfait:</label>
+                    <div class="col-sm-8">
+                      {% if app.user.subscribe == 1 %}
+                        Basique
+                      {% endif %}
+                      {% if app.user.subscribe == 2 %}
+                        Pro
+                      {% endif %}
+                      {% if app.user.subscribe == 3 %}
+                        Premium
+                      {% endif %}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          <div id="pricing" class="col-md-7">
+            <div id="pricing-container" class="col-md-12">
+                <div class="pricing-item {% if app.user.subscribe == 1 %} current_offer {% endif %} col-md-3 col-md-offset-1">
+                    <h3>Basique</h3>
+                    <ul>
+                        <li>osef1</li>
+                        <li>osef2</li>
+                    </ul>
+                    <form action="{{ path('mti_user_back_office_update') }}" method="post">
+                      <input type="hidden" value="1" name="offer" />
+                      <button type="submit">
+                        {% if app.user.subscribe == 1 %} Votre abonnement {% else %} Changer d'offre {% endif %}
+                      </button>
+                    </form>
+                </div>
+                <div class="pricing-item {% if app.user.subscribe == 2 %} current_offer {% endif %} col-md-3 col-md-offset-1">
+                    <h3>pro</h3>
+                    <ul>
+                        <li>osef1</li>
+                        <li>osef2</li>
+                    </ul>
+                    <form action="{{ path('mti_user_back_office_update') }}" method="post">
+                      <input type="hidden" value="2" name="offer" />
+                      <button type="submit">
+                        {% if app.user.subscribe == 2 %} Votre abonnement {% else %} Changer d'offre {% endif %}
+                      </button>
+                    </form>
+                </div>
+                <div class="pricing-item {% if app.user.subscribe == 3 %} current_offer {% endif %} col-md-3 col-md-offset-1">
+                    <h3>premium</h3>
+                    <ul>
+                        <li>osef1</li>
+                        <li>osef2</li>
+                    </ul>
+                    <form action="{{ path('mti_user_back_office_update') }}" method="post">
+                      <input type="hidden" value="3" name="offer" />
+                      <button type="submit">
+                        {% if app.user.subscribe == 3 %} Votre abonnement {% else %} Changer d'offre {% endif %}
+                      </button>
+                    </form>
+                </div>
+            </div>
+        </div>
         </div>
 		<script type="text/javascript">
 

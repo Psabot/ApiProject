@@ -79,9 +79,9 @@ class BackofficeController extends Controller
         return $this->render('MTIUserBackOfficeBundle:Backoffice:index.html.twig', array('countcall' => $count, 'datecount' => $dateCount, 'calltype' => $callTypes, 'token' => $token));
     }
 
-    public function createAction()
+    public function createAction(Request $request)
 	{
-		$request = Request::createFromGlobals();
+		//$request = Request::createFromGlobals();
 		$username = $request->request->get('_username', 'username');
 		$lastname = $request->request->get('_lastname', 'lastname');
 		$password = $request->request->get('_password', 'password');
@@ -108,6 +108,19 @@ class BackofficeController extends Controller
 	    return new Response('username  : '.$username);
 	}
 
+	public function updateAction()
+	{
+		$request = Request::createFromGlobals();
+		$offer = $request->request->get('offer', 1);
+
+		$em = $this->getDoctrine()->getManager();
+    	$user = $this->getUser();
+
+    	$user->setSubscribe($offer);
+    	$em->flush();
+    	return $this->redirect($this->generateUrl('mti_user_back_office_homepage'));
+	}
+
 	public function showAction($id)
 	{
 	    $profile = $this->getDoctrine()
@@ -120,7 +133,7 @@ class BackofficeController extends Controller
 	        );
 	    }
 
-	    return new Response('Profile: '.$profile->getId().' '.$profile->getFirstname());
+	    return new Response('Profile: '.$profile->getId().' '.$profile->getUsername());
 	}
 
 	public function testjsonAction()
