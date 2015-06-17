@@ -44,6 +44,16 @@ class BackofficeController extends Controller
 
 		$callTypes = $callTypesQuery->getResult();
 
+		// Calls regions
+		$callRegionsQuery = $em->createQuery(
+		    'SELECT call.region, count(call)
+		    FROM MTIUserBackOfficeBundle:Call call
+		    WHERE call.userid = :user AND call.region IS NOT NULL
+		    GROUP BY call.region'
+		)->setParameter('user', $user->getId());
+
+		$callRegions = $callRegionsQuery->getResult();
+
 		// Calls by date
 		$query = $em->createQuery(
 		    'SELECT call.created as createdDate
@@ -76,7 +86,7 @@ class BackofficeController extends Controller
 		// Generate token -> base64(publickey:secretkey)
 		$token = base64_encode($user->getPublicapikey().':'.$user->getSecretapikey());
 
-        return $this->render('MTIUserBackOfficeBundle:Backoffice:index.html.twig', array('countcall' => $count, 'datecount' => $dateCount, 'calltype' => $callTypes, 'token' => $token));
+        return $this->render('MTIUserBackOfficeBundle:Backoffice:index.html.twig', array('countcall' => $count, 'datecount' => $dateCount, 'calltype' => $callTypes, 'callregion' => $callRegions, 'token' => $token));
     }
 
     public function createAction(Request $request)

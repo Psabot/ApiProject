@@ -36,6 +36,35 @@ class ParsingTools
         "reunion"
     );
 
+    public static $regions_match = array(
+        "alsace" => "Alsace",
+        "aquitaine" => "Aquitaine",
+        "auvergne" => "Auvergne",
+        "basse_normandie" => "Basse-Normandie",
+        "bourgogne" => "Bourgogne",
+        "bretagne" => "Bretagne",
+        "centre" => "Centre",
+        "champagne_ardenne" => "Champagne-Ardenne",
+        "corse" => "Corse",
+        "franche_comte" => "Franche-Comté",
+        "haute_normandie" => "Haute-Normandie",
+        "ile_de_france" => "Ile-de-France",
+        "languedoc_roussillon" => "Languedoc-Roussillon",
+        "limousin" => "Limousin",
+        "lorraine" => "Lorraine",
+        "midi_pyrenees" => "Midi-Pyrénées",
+        "nord_pas_de_calais" => "Nord-Pas-de-Calais",
+        "pays_de_la_loire" => "Pays de la Loire",
+        "picardie" => "Picardie",
+        "poitou_charentes" => "Poitou-Charentes",
+        "provence_alpes_cote_d_azur" => "Provence-Alpes-Côte d'Azur",
+        "rhone_alpes" => "Rhône-Alpes",
+        "guadeloupe" => "Guadeloupe",
+        "martinique" => "Martinique",
+        "guyane" => "Guyane",
+        "reunion" => "Réunion"
+    );
+
     public static $categories_map = array(
         "offres_d_emploi",
         "voitures",
@@ -99,13 +128,14 @@ class ParsingTools
         "autres"
     );
 
-    public static function addRequest($context, $profile, $type) {
+    public static function addRequest($context, $profile, $type, $region) {
         $call = new Call();
 
         $user = $profile;
 
         $call->setUserId($user->getId());
         $call->setType($type);
+        $call->setRegion($region);
 
         $em = $context->getDoctrine()->getManager();
         $em->persist($call);
