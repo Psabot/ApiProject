@@ -276,3 +276,47 @@ body
   font-style: italic;
   opacity: 0.6;
 }
+
+.userInfos
+{
+  width: 100%;
+  border-top: 1px solid #181A1C;
+  border-bottom: 1px solid #181A1C;
+  padding: 10px;
+  margin: 15px 0px;
+}
+
+.userName
+{
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
+  vertical-align: text-bottom;
+}
+
+.userAddress, .aDate, .aPrice, .aMail
+{
+  display: inline-block;
+  margin-left: 50px;
+  vertical-align: middle;
+}
+
+.userAddress
+{
+  vertical-align: bottom !important;
+}
+
+.region
+{
+  display: block;
+}
+
+.desc
+{
+  padding-bottom: 50px;
+}
+
+.aMail a
+{
+  text-decoration: none;
+}

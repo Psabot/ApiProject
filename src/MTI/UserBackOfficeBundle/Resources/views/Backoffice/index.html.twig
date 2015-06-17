@@ -198,7 +198,32 @@
                       });
                       str2+="</div>";
                     }
-                    str2 += "<div style='clear:both;'>"+data['description']+"</div>";
+                    str2+='<div class="contact" style="display:none">';
+                      str2+='<form action="/symfonyproject/web/app_dev.php/leboncoin/post/'+data['ref']+'/?token=TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=" method="post">';
+                        str2+='<input type="hidden" name="token" value="TWpBMk1qUXpOakV4Ok1qQTNNVEUxTlRVNE53PT0=" />';
+                        str2+='<input type="text" id="name" name="name" class="form-control" placeholder="Prenom"/> <br/>';
+                        str2+='<input type="text" id="email" name="email" placeholder="Email" class="form-control" /> <br/>';
+                        str2+='<input type="text" id="phone" name="phone" placeholder="Numéro de teléphone" class="form-control" /> ';
+                        str2+='<br/>';
+                        str2+='<textarea name="body" class="form-control"></textarea>'; 
+                        str2+='<br/>';
+                        str2+='<input type="submit" value="Envoyer" class="btn btn-primary" />';
+                      str2+='</form>';
+                    str2+='</div>';
+                    str2 +="<div class='userInfos'>";
+                      str2 += "<div class='userName'>"+data['user']+"</div>";
+                      str2 +="<div class='userAddress'>";
+                        str2 += "<span class='region'>"+data['region']+"</span>"; 
+                        str2 += "<span class='town'>"+data['town']+"</span>, ";  
+                        str2 += "<span class='postal'>"+data['postal']+"</span>";   
+                      str2 +="</div>";
+                      str2 += "<div class='aPrice'>Prix : "+data['price']+"€</div>";
+                      str2 += "<div class='aDate'>Mise en ligne : "+data['date']+"</div>";
+                      str2 += "<div class='aMail'><a href=''><i class='fa fa-envelope-o'> </i>Envoyer un mail</a></div>";
+                    str2 +="</div>"; 
+                    str2 += "<h3 class='title'>"+data['title']+"</h3>";
+                    str2 += "<a href=''>hiuguddqsfgefvpudvfyvdpfv</a>"
+                    str2 += "<div class='desc'>"+data['description']+"</div>";
                     $('#annonce').append(str2);
                 });
               });
@@ -207,6 +232,11 @@
         </div>
     </div>
 		<script type="text/javascript">
+
+      $(document).on( "click", "#annonce a", function(event) {
+        console.log($(this).parent().parent().parent().find(".contact"));
+        event.preventDefault();
+      });
 
         google.setOnLoadCallback(drawRegionsMap);
 
