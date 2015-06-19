@@ -42,22 +42,23 @@
             var total_div = $('#total_div');
 
             for (var i = 0; i < counter_total; i++) {
-                jQuery.ajax({
-                    url: url,
-                    success: function(result) {
+                $.ajax({url: url})
+                    .done(function(data) {
+                        console.log(data);
                         $('body').append('<div><strong>' + (counter+1) + '</strong> - ' + '<span style="color: green">SUCCESS</span></div>');
                         counter++;
                         total_div.html((counter) + '/' + counter_total);
                         if (counter == counter_total) clearTimeout(compte);
-                    },
-                    error: function(result) {
-                        $('body').append('<div><strong>' + (counter+1) + '</strong> - ' + '<span style="color: green">ERROR</span></div>');
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                        $('body').append('<div><strong>' + (counter+1) + '</strong> - ' + '<span style="color: red">ERROR</span></div>');
                         counter_error++;
+                        counter++;
                         total_div.html((counter) + '/' + counter_total);
                         if (counter == counter_total) clearTimeout(compte);
-                    },
-                    //async: false
-                }); 
+                    });
             }
         }
 

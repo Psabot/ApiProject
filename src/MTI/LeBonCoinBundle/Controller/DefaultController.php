@@ -36,6 +36,7 @@ class DefaultController extends Controller
             return $response;
         }
 
+        $cache_url = $request->query->get('cache');
         $region_url = (!in_array($request->query->get('region'), ParsingTools::$regions_map)) ? null : $request->query->get('region');
         $category_url = (!in_array($request->query->get('category'), ParsingTools::$categories_map)) ? "annonces" : $request->query->get('category');
         $towns_url = $request->query->get('towns');
@@ -57,6 +58,19 @@ class DefaultController extends Controller
         if ($pmax_url != null) $request_url .= "&pe=".$pmax_url;
         if ($page_url != null) $request_url .= "&o=".$page_url;
         //echo $request_url;
+
+        $request_type = ($type_url == 'p') ? 1 : (($type_url == 'c') ? 2 : 0);
+
+        if ($cache_url != "false") {
+            $has_cache = $checkUserCall->checkCache($request_url);
+            if ($has_cache != false) {
+                $response = new Response();
+                $response->setContent($has_cache);
+                $response->headers->set('Content-Type', 'application/json');
+                ParsingTools::addRequest($this, $profile, $request_type, ($region_url == null) ? null : ParsingTools::$regions_match[$region_url], array_search($category_url, ParsingTools::$categories_map));
+                return $response;
+            }
+        }
 
         $html = file_get_html($request_url);
 
@@ -185,9 +199,14 @@ class DefaultController extends Controller
         $response->setContent($response_json);
         $response->headers->set('Content-Type', 'application/json');
 
-        $request_type = ($type_url == 'p') ? 1 : (($type_url == 'c') ? 2 : 0);
-
         ParsingTools::addRequest($this, $profile, $request_type, ($region_url == null) ? null : ParsingTools::$regions_match[$region_url], array_search($category_url, ParsingTools::$categories_map));
+
+        if ($cache_url != "false") {
+            /*echo '<br>--------------------------<br>';
+            echo $response_json;
+            echo '<br>--------------------------<br>';*/
+            $checkUserCall->addChache($request_url, $response_json);
+        }
 
         return $response;
     }
@@ -208,6 +227,7 @@ class DefaultController extends Controller
             return $response;
         }
 
+        $cache_url = $request->query->get('cache');
         $region_url = (!in_array($request->query->get('region'), ParsingTools::$regions_map)) ? null : $request->query->get('region');
         $category_url = (!in_array($request->query->get('category'), ParsingTools::$categories_map)) ? "annonces" : $request->query->get('category');
         $towns_url = $request->query->get('towns');
@@ -229,6 +249,20 @@ class DefaultController extends Controller
         if ($pmax_url != null) $request_url .= "&pe=".$pmax_url;
         if ($page_url != null) $request_url .= "&o=".$page_url;
         //echo $request_url;
+
+        $request_type = ($type_url == 'p') ? 4 : (($type_url == 'c') ? 5 : 3);
+
+        if ($cache_url != "false") {
+            $has_cache = $checkUserCall->checkCache($request_url);
+            if ($has_cache != false) {
+                $response = new Response();
+                $response->setContent($has_cache);
+                $response->headers->set('Content-Type', 'application/json');
+                ParsingTools::addRequest($this, $profile, $request_type, ($region_url == null) ? null : ParsingTools::$regions_match[$region_url], array_search($category_url, ParsingTools::$categories_map));
+                return $response;
+            }
+        }
+
         $html = file_get_html($request_url);
 
         if ($html->find('h2[id=result_ad_not_found]', 0) != null) {
@@ -356,9 +390,14 @@ class DefaultController extends Controller
         $response->setContent($response_json);
         $response->headers->set('Content-Type', 'application/json');
 
-        $request_type = ($type_url == 'p') ? 4 : (($type_url == 'c') ? 5 : 3);
-
         ParsingTools::addRequest($this, $profile, $request_type, ($region_url == null) ? null : ParsingTools::$regions_match[$region_url], array_search($category_url, ParsingTools::$categories_map));
+
+        if ($cache_url != "false") {
+            /*echo '<br>--------------------------<br>';
+            echo $response_json;
+            echo '<br>--------------------------<br>';*/
+            $checkUserCall->addChache($request_url, $response_json);
+        }
 
         return $response;
     }
@@ -379,7 +418,21 @@ class DefaultController extends Controller
             return $response;
         }
 
+        $cache_url = $request->query->get('cache');
+
         $request_url = 'http://www.leboncoin.fr/annonces/'.$adID.".htm";
+
+        if ($cache_url != "false") {
+            $has_cache = $checkUserCall->checkCache($request_url);
+            if ($has_cache != false) {
+                $response = new Response();
+                $response->setContent($has_cache);
+                $response->headers->set('Content-Type', 'application/json');
+                ParsingTools::addRequest($this, $profile, 6, null, null);
+                return $response;
+            }
+        }
+
         //echo $request_url;
         try {
             $html = file_get_html($request_url);
@@ -458,6 +511,13 @@ class DefaultController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         ParsingTools::addRequest($this, $profile, 6, null, null);
+
+        if ($cache_url != "false") {
+            /*echo '<br>--------------------------<br>';
+            echo $response_json;
+            echo '<br>--------------------------<br>';*/
+            $checkUserCall->addChache($request_url, $response_json);
+        }
 
         return $response;
     }
